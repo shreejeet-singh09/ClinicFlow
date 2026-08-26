@@ -311,10 +311,10 @@ function ClinicWorkspace({ profile, onSignOut }) {
 
   useEffect(() => {
     if (tab !== 'calendar' || !profile.clinic_id) return
-    ;(async () => {
-      const [vs, bill] = await Promise.all([fetchVisits(profile.clinic_id, selectedDate), fetchDayBilling(profile.clinic_id, selectedDate)])
-      setCalendarVisits(vs); setCalendarBilling(bill)
-    })()
+      ; (async () => {
+        const [vs, bill] = await Promise.all([fetchVisits(profile.clinic_id, selectedDate), fetchDayBilling(profile.clinic_id, selectedDate)])
+        setCalendarVisits(vs); setCalendarBilling(bill)
+      })()
   }, [tab, profile.clinic_id, selectedDate])
 
   useEffect(() => {
@@ -357,21 +357,21 @@ function ClinicWorkspace({ profile, onSignOut }) {
   useEffect(() => {
     if (!online) return
     let cancelled = false
-    ;(async () => {
-      try {
-        const { getPendingActions, clearOfflineAction } = await import('../lib/offline-queue')
-        const items = await getPendingActions()
-        if (cancelled) return
-        setPendingActions(items.length)
-        for (const it of items) {
-          if (it.type === 'transition') {
-            try { await transitionVisit(it.visit_id, it.to); await clearOfflineAction(it.action_id) } catch { /* keep queued */ }
-          } else { await clearOfflineAction(it.action_id) }
-        }
-        const remaining = await getPendingActions(); setPendingActions(remaining.length)
-        if (items.length) loadEverything()
-      } catch {}
-    })()
+      ; (async () => {
+        try {
+          const { getPendingActions, clearOfflineAction } = await import('../lib/offline-queue')
+          const items = await getPendingActions()
+          if (cancelled) return
+          setPendingActions(items.length)
+          for (const it of items) {
+            if (it.type === 'transition') {
+              try { await transitionVisit(it.visit_id, it.to); await clearOfflineAction(it.action_id) } catch { /* keep queued */ }
+            } else { await clearOfflineAction(it.action_id) }
+          }
+          const remaining = await getPendingActions(); setPendingActions(remaining.length)
+          if (items.length) loadEverything()
+        } catch { }
+      })()
     return () => { cancelled = true }
   }, [online, loadEverything])
 
@@ -566,7 +566,7 @@ function SettingsPanel({ clinic, onSaved, onToast, publicUrl }) {
   async function save(e) {
     e.preventDefault(); setSaving(true)
     const sb = supabase()
-    let openingHours = {}; try { openingHours = JSON.parse(f.opening_hours || '{}') } catch {}
+    let openingHours = {}; try { openingHours = JSON.parse(f.opening_hours || '{}') } catch { }
     const { error } = await sb.from('clinics').update({ name: f.name, doctor_name: f.doctor_name, address: f.address, phone: f.phone, city: f.city, consultation_fee: Number(f.consultation_fee) || 0, opening_hours: openingHours, updated_at: new Date().toISOString() }).eq('id', clinic.id)
     setSaving(false)
     if (error) onToast('Could not save: ' + error.message); else { onToast('Clinic settings saved.'); onSaved() }
@@ -646,15 +646,19 @@ function AdminDashboard({ profile, onSignOut }) {
   const [notice, setNotice] = useState('')
   const [settings, setSettings] = useState({ price_per_completed: 2.5, monthly_cap: 5000 })
   const [savingSettings, setSavingSettings] = useState(false)
+  const [invoices, setInvoices] = useState([])
 
   async function load() {
     const sb = supabase(); if (!sb) return
-    const [{ data: cs }, { data: bill }, { data: today }] = await Promise.all([
+    const [{ data: cs }, { data: bill }, { data: today }, { data: inv }] = await Promise.all([
       sb.from('clinics').select('id, name, slug, doctor_name, status, city, consultation_fee, created_at'),
       sb.from('billing_usage').select('clinic_id, amount, usage_date'),
       sb.from('visits').select('id, status, clinic_id, visit_date').eq('visit_date', new Date().toISOString().slice(0, 10)),
+      sb.from('invoices').select('*').order('created_at', { ascending: false }),
     ])
     setClinics(cs || [])
+    setInvoices(inv || [])
+
     const today0 = new Date().toISOString().slice(0, 10)
     const monthStart = new Date(); monthStart.setDate(1); const monthStartISO = monthStart.toISOString().slice(0, 10)
     const rev = (bill || []).reduce((acc, r) => {
@@ -674,6 +678,27 @@ function AdminDashboard({ profile, onSignOut }) {
     const { error } = await sb.from('clinics').update({ status, updated_at: new Date().toISOString() }).eq('id', id)
     if (error) { setNotice('Failed: ' + error.message); return }
     setNotice(`Clinic status → ${status.replace('_', ' ')}`); setTimeout(() => setNotice(''), 2400); load()
+  }
+  async function markInvoicePaid(id) {
+    const sb = supabase()
+
+    const { error } = await sb
+      .from('invoices')
+      .update({
+        status: 'paid',
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', id)
+
+    if (error) {
+      setNotice('Payment update failed: ' + error.message)
+      return
+    }
+
+    setNotice('Invoice marked as paid.')
+    setTimeout(() => setNotice(''), 2400)
+
+    await load()
   }
   async function removeClinic(id) {
     const sb = supabase(); const { error } = await sb.from('clinics').delete().eq('id', id)
@@ -746,6 +771,65 @@ function AdminDashboard({ profile, onSignOut }) {
                               {c.status === 'suspended' && <button onClick={() => updateStatus(c.id, 'active')} className="rounded-lg border border-emerald-200 px-2.5 py-2 text-[11px] text-emerald-700">Reactivate</button>}
                               <button onClick={() => setConfirm(c)} className="rounded-lg border border-slate-200 px-2.5 py-2 text-[11px] text-slate-500">Delete</button>
                             </div>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            <section className="rounded-2xl border border-slate-200 bg-white">
+              <div className="p-5 border-b border-slate-100">
+                <h3 className="font-bold">Invoices</h3>
+                <p className="mt-1 text-sm text-slate-400">
+                  Track clinic payments and mark invoices as paid.
+                </p>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[700px] text-left text-sm">
+                  <thead className="border-b border-slate-100 text-[10px] uppercase tracking-wider text-slate-400">
+                    <tr>
+                      <th className="px-5 py-3">Clinic</th>
+                      <th className="px-3 py-3">Invoice</th>
+                      <th className="px-3 py-3">Amount</th>
+                      <th className="px-3 py-3">Status</th>
+                      <th className="px-3 py-3">Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody className="divide-y divide-slate-100">
+                    {invoices.map((invoice) => {
+                      const clinic = clinics.find(c => c.id === invoice.clinic_id)
+
+                      return (
+                        <tr key={invoice.id}>
+                          <td className="px-5 py-4 font-semibold text-slate-900">
+                            {clinic?.name || 'Unknown clinic'}
+                          </td>
+
+                          <td className="px-3 py-4 text-slate-600">
+                            {invoice.invoice_number}
+                          </td>
+
+                          <td className="px-3 py-4 font-semibold">
+                            ₹{Number(invoice.amount_inr || 0).toFixed(2)}
+                          </td>
+
+                          <td className="px-3 py-4">
+                            <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-700">
+                              {invoice.status?.toUpperCase() || 'UNKNOWN'}
+                            </span>
+                          </td>
+
+                          <td className="px-3 py-4">
+                            <button
+                              onClick={() => markInvoicePaid(invoice.id)}
+                              className="rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold"
+                            >
+                              MARK AS PAID
+                            </button>
                           </td>
                         </tr>
                       )
