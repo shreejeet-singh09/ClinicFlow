@@ -42,7 +42,17 @@ export default function PublicQueuePage({ params }) {
     setTicket(data)
     setLoading(false)
   }
+  useEffect(() => {
+    const savedTicket = localStorage.getItem(`clinicflow_ticket_${slug}`)
 
+    if (savedTicket) {
+      try {
+        setTicket(JSON.parse(savedTicket))
+      } catch {
+        localStorage.removeItem(`clinicflow_ticket_${slug}`)
+      }
+    }
+  }, [slug])
   useEffect(() => {
     if (!ticket?.patient_access_token || !supabase) return
     let cancelled = false
