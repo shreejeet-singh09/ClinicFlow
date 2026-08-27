@@ -1063,44 +1063,8 @@ function BillingPanel({ clinicId, onToast }) {
   return (
     <div className="grid gap-6 xl:grid-cols-[1fr_360px]">
       <div className="space-y-6">
-        <section className="rounded-2xl border border-slate-200 bg-white p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="font-bold">Current plan</h3>
-              <p className="mt-1 text-xs text-slate-400">Your clinic subscription and included features.</p>
-            </div>
-            <StatusPill tone={entitlements.status === 'active' ? 'done' : entitlements.status === 'trialing' ? 'called' : 'waiting'}>{entitlements.status}</StatusPill>
-          </div>
-          {entitlements.plan ? (
-            <div className="mt-5 grid gap-4 sm:grid-cols-3">
-              <div><p className="text-xs text-slate-500">Plan</p><p className="text-lg font-bold">{entitlements.plan.name}</p></div>
-              <div><p className="text-xs text-slate-500">Price</p><p className="text-lg font-bold">{fmtINR(entitlements.plan.price_inr)}<span className="text-xs font-normal text-slate-400"> /mo</span></p></div>
-              <div><p className="text-xs text-slate-500">Visit limit</p><p className="text-lg font-bold">{entitlements.plan.monthly_visits_limit ?? 'Unlimited'}</p></div>
-            </div>
-          ) : <p className="mt-4 text-sm text-slate-500">No active subscription. Choose a plan below.</p>}
-          {entitlements.trial_ends_at && entitlements.status === 'trialing' && <p className="mt-4 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">Trial ends on {new Date(entitlements.trial_ends_at).toLocaleDateString('en-IN')}.</p>}
-        </section>
-        <section className="rounded-2xl border border-slate-200 bg-white p-6">
-          <h3 className="font-bold">Available plans</h3>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            {plans.map(p => {
-              const active = entitlements.plan?.id === p.id
-              return (
-                <div key={p.id} className={`rounded-2xl border p-4 ${active ? 'border-blue-500 bg-blue-50/50' : 'border-slate-200 bg-white'}`}>
-                  <div className="flex items-center justify-between"><h4 className="font-bold">{p.name}</h4>{active && <span className="rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-bold text-white">Current</span>}</div>
-                  <p className="mt-2 text-2xl font-bold">{fmtINR(p.price_inr)}<span className="text-xs font-normal text-slate-500"> /mo</span></p>
-                  <ul className="mt-3 space-y-1 text-xs text-slate-600">
-                    <li>{p.monthly_visits_limit ?? 'Unlimited'} visits / month</li>
-                    <li>{p.doctors_limit ?? 'Unlimited'} doctor(s)</li>
-                    <li>{p.receptionists_limit ?? 'Unlimited'} receptionist(s)</li>
-                    {Object.entries(p.features || {}).filter(([, v]) => v).map(([k]) => <li key={k}>✓ {k.replace('_', ' ')}</li>)}
-                  </ul>
-                  <button onClick={() => selectPlan(p.code)} disabled={active} className="mt-4 h-9 w-full rounded-lg bg-blue-600 text-xs font-bold text-white disabled:opacity-40">{active ? 'Current plan' : 'Choose plan'}</button>
-                </div>
-              )
-            })}
-          </div>
-        </section>
+        
+
         <section className="rounded-2xl border border-slate-200 bg-white p-6">
           <h3 className="font-bold">Invoices</h3>
           <p className="mt-1 text-xs text-slate-400">Payment records for your clinic.</p>
@@ -1118,11 +1082,68 @@ function BillingPanel({ clinicId, onToast }) {
         </section>
       </div>
       <aside className="space-y-4">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 text-xs">
-          <h4 className="text-sm font-bold">Payment provider</h4>
-          <p className="mt-2 text-slate-500">Provider: <strong>{paymentsCfg?.provider || 'noop'}</strong></p>
-          <p className="mt-1 text-slate-500">Status: {paymentsCfg?.configured ? <span className="font-semibold text-emerald-600">Configured</span> : <span className="font-semibold text-amber-600">NOT CONFIGURED</span>}</p>
-          <p className="mt-3 text-slate-500">The billing architecture is ready. Set <code className="rounded bg-slate-100 px-1">PAYMENT_PROVIDER</code>, <code className="rounded bg-slate-100 px-1">PAYMENT_API_KEY</code>, <code className="rounded bg-slate-100 px-1">PAYMENT_WEBHOOK_SECRET</code> to activate checkout.</p>
+        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+          <div className="flex items-center justify-between">
+            <h4 className="text-sm font-bold text-slate-900">Pay via UPI</h4>
+            <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700">
+              Manual payment
+            </span>
+          </div>
+
+          <p className="mt-2 text-xs text-slate-500">
+            Pay your clinic invoice using the QR code or UPI ID below.
+          </p>
+
+          <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3 text-center">
+            <img
+              src="/clinicflow-payment-qr.jpeg"
+              alt="ClinicFlow UPI payment QR code"
+              className="mx-auto h-48 w-48 rounded-lg object-contain"
+            />
+          </div>
+
+          <div className="mt-4">
+            <p className="text-xs font-semibold text-slate-500">
+              UPI ID
+            </p>
+
+            <div className="mt-1 flex items-center gap-2">
+              <code className="min-w-0 flex-1 rounded-lg bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-800">
+                shreejeetsorekar348@okhdfcbank
+              </code>
+
+              <button
+                type="button"
+                onClick={() => {
+                  navigator.clipboard?.writeText(
+                    'shreejeetsorekar348@okhdfcbank'
+                  )
+                  onToast('UPI ID copied.')
+                }}
+                className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-4 rounded-xl bg-blue-50 p-3">
+            <p className="text-xs font-semibold text-blue-900">
+              How to pay
+            </p>
+
+            <ol className="mt-2 space-y-1.5 text-xs text-blue-800">
+              <li>1. Scan the QR code or use the UPI ID.</li>
+              <li>2. Pay the amount shown on your invoice.</li>
+              <li>3. Keep your payment confirmation.</li>
+              <li>4. Our admin will verify the payment manually.</li>
+            </ol>
+          </div>
+
+          <p className="mt-4 text-[11px] leading-4 text-slate-400">
+            Your invoice will be marked as paid after the payment is
+            manually verified by ClinicFlow admin.
+          </p>
         </div>
       </aside>
     </div>
