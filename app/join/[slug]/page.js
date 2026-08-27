@@ -47,7 +47,20 @@ export default function PublicQueuePage({ params }) {
     if (!ticket?.patient_access_token || !supabase) return
     let cancelled = false
     const refresh = async () => {
-      const { data } = await supabase.rpc('public_queue_snapshot', { access_token: ticket.patient_access_token })
+      const started = performance.now()
+
+      const { data, error } = await supabase.rpc(
+        'public_queue_snapshot',
+        { access_token: ticket.patient_access_token }
+      )
+
+      console.log(
+        'Queue refresh:',
+        Math.round(performance.now() - started),
+        'ms',
+        error
+      )
+
       if (data && !cancelled) setSnapshot(data)
     }
     refresh()
@@ -57,7 +70,7 @@ export default function PublicQueuePage({ params }) {
       .on('postgres_changes', { event: '*', schema: 'public', table: 'visits', filter: `clinic_id=eq.${ticket.clinic_id}` }, refresh)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'queue_status', filter: `clinic_id=eq.${ticket.clinic_id}` }, refresh)
       .subscribe()
-    const interval = setInterval(refresh, 20000)
+    const interval = setInterval(refresh, 2000)
     return () => { cancelled = true; supabase.removeChannel(channel); clearInterval(interval) }
   }, [ticket, supabase])
 
