@@ -38,8 +38,19 @@ export default function PublicQueuePage({ params }) {
       patient_phone: form.phone,
       patient_area: form.area || null,
     })
-    if (joinError) { setError(joinError.message); setLoading(false); return }
+    if (joinError) {
+      setError(joinError.message)
+      setLoading(false)
+      return
+    }
+
     setTicket(data)
+
+    localStorage.setItem(
+      `clinicflow_ticket_${slug}`,
+      JSON.stringify(data)
+    )
+
     setLoading(false)
   }
   useEffect(() => {
