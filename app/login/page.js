@@ -161,7 +161,7 @@ function StaffShell({ profile, clinic, children, activeTab, onTab, onSignOut, ex
     : [{ k: 'overview', label: 'Overview', icon: LayoutDashboard }, { k: 'queue', label: 'Queue', icon: Users }, { k: 'calendar', label: 'Calendar', icon: CalendarDays }, { k: 'staff', label: 'Staff', icon: UserPlus }, { k: 'billing', label: 'Billing', icon: CreditCard }, { k: 'settings', label: 'Clinic settings', icon: Settings }, { k: 'audit', label: 'Audit log', icon: ClipboardList }]
   return (
     <div className="min-h-screen bg-[#f7f9fc] text-slate-900">
-      <aside className="fixed inset-y-0 left-0 hidden w-[248px] flex-col border-r border-slate-200 bg-white px-5 py-6 lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-20 hidden w-[248px] flex-col border-r border-slate-200 bg-white px-5 py-6 lg:flex">
         <div className="flex items-center gap-3 px-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-200"><Activity size={19} /></div><span className="text-lg font-bold tracking-tight">Clinic<span className="text-blue-600">Flow</span></span></div>
         <div className="mt-3 px-2 text-xs font-semibold text-slate-500">{clinic?.name}</div>
         <div className="mt-8 px-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">{isReception ? 'Reception' : 'Owner workspace'}</div>
@@ -718,7 +718,7 @@ function AdminDashboard({ profile, onSignOut }) {
   const badge = s => s === 'active' ? 'bg-emerald-50 text-emerald-700' : s === 'pending_approval' ? 'bg-amber-50 text-amber-700' : s === 'suspended' ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-600'
   return (
     <div className="min-h-screen bg-[#f7f9fc] text-slate-900">
-      <aside className="fixed inset-y-0 left-0 hidden w-[248px] flex-col border-r border-slate-800 bg-slate-950 px-5 py-6 text-white lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-20 hidden  w-[248px] flex-col border-r border-slate-800 bg-slate-950 px-5 py-6 text-white lg:flex">
         <div className="flex items-center gap-3 px-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500"><Activity size={19} /></div><span className="text-lg font-bold">Clinic<span className="text-blue-400">Flow</span></span></div>
         <div className="mt-10 px-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Platform control</div>
         <nav className="mt-3 space-y-1">
