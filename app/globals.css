@@ -50,6 +50,7 @@ code {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -58,7 +59,7 @@ code {
 
 
 @layer base {
-  :root {
+    :root {
         --background: 0 0% 100%;
         --foreground: 222.2 84% 4.9%;
         --card: 0 0% 100%;
@@ -93,7 +94,8 @@ code {
         --sidebar-border: 220 13% 91%;
         --sidebar-ring: 217.2 91.2% 59.8%;
     }
-  .dark {
+
+    .dark {
         --background: 222.2 84% 4.9%;
         --foreground: 210 40% 98%;
         --card: 222.2 84% 4.9%;
@@ -132,10 +134,475 @@ code {
 
 
 @layer base {
-  * {
-    @apply border-border;
+    * {
+        @apply border-border;
     }
-  body {
-    @apply bg-background text-foreground;
+
+    body {
+        @apply bg-background text-foreground;
     }
+}
+/* =========================================================
+   CLINICFLOW — GLOBAL ANIMATED WORLD
+   ========================================================= */
+
+.clinic-global-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* =========================================================
+   HUGE MOVING COLOR WORLDS
+   ========================================================= */
+
+.clinic-bg-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  mix-blend-mode: multiply;
+}
+
+.clinic-bg-blob-1 {
+  width: 800px;
+  height: 800px;
+  left: -300px;
+  top: 0;
+
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.35),
+    rgba(59, 130, 246, 0.16) 40%,
+    transparent 70%
+  );
+
+  animation: blobMove1 18s ease-in-out infinite;
+}
+
+.clinic-bg-blob-2 {
+  width: 900px;
+  height: 900px;
+  right: -350px;
+  top: 300px;
+
+  background: radial-gradient(
+    circle,
+    rgba(34, 211, 238, 0.32),
+    rgba(56, 189, 248, 0.12) 45%,
+    transparent 70%
+  );
+
+  animation: blobMove2 22s ease-in-out infinite;
+}
+
+.clinic-bg-blob-3 {
+  width: 750px;
+  height: 750px;
+  left: 30%;
+  top: 900px;
+
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.27),
+    rgba(129, 140, 248, 0.10) 45%,
+    transparent 70%
+  );
+
+  animation: blobMove3 20s ease-in-out infinite;
+}
+
+.clinic-bg-blob-4 {
+  width: 700px;
+  height: 700px;
+  right: 20%;
+  top: 1900px;
+
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.24),
+    rgba(34, 211, 238, 0.10) 45%,
+    transparent 70%
+  );
+
+  animation: blobMove4 25s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   GIANT TECH GRID
+   ========================================================= */
+
+.clinic-bg-grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(37, 99, 235, 0.075) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(37, 99, 235, 0.075) 1px,
+      transparent 1px
+    );
+
+  background-size: 60px 60px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+
+  animation: gridTravel 14s linear infinite;
+}
+
+
+/* =========================================================
+   GIANT ROTATING RINGS
+   ========================================================= */
+
+.clinic-bg-ring {
+  position: absolute;
+  border-radius: 50%;
+
+  border: 1px solid rgba(59, 130, 246, 0.16);
+
+  box-shadow:
+    0 0 60px rgba(59, 130, 246, 0.08),
+    inset 0 0 60px rgba(59, 130, 246, 0.05);
+}
+
+.ring-1 {
+  width: 900px;
+  height: 900px;
+
+  left: 50%;
+  top: 500px;
+
+  transform: translateX(-50%);
+
+  animation: ringRotate1 35s linear infinite;
+}
+
+.ring-2 {
+  width: 1250px;
+  height: 1250px;
+
+  left: 50%;
+  top: 1100px;
+
+  transform: translateX(-50%);
+
+  border-style: dashed;
+
+  animation: ringRotate2 45s linear infinite reverse;
+}
+
+.ring-3 {
+  width: 1500px;
+  height: 1500px;
+
+  left: 50%;
+  top: 2200px;
+
+  transform: translateX(-50%);
+
+  border-color: rgba(34, 211, 238, 0.10);
+
+  animation: ringRotate3 55s linear infinite;
+}
+
+
+/* =========================================================
+   TRAVELING LIGHT BEAMS
+   ========================================================= */
+
+.clinic-bg-beam {
+  position: absolute;
+
+  width: 1200px;
+  height: 3px;
+
+  left: -1300px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.05),
+    rgba(59, 130, 246, 0.75),
+    rgba(34, 211, 238, 0.5),
+    transparent
+  );
+
+  filter: blur(1px);
+
+  transform: rotate(-17deg);
+
+  animation: beamTravel 9s linear infinite;
+}
+
+.beam-1 {
+  top: 25%;
+}
+
+.beam-2 {
+  top: 48%;
+  animation-delay: 3s;
+}
+
+.beam-3 {
+  top: 72%;
+  animation-delay: 6s;
+}
+
+
+/* =========================================================
+   FLOATING PARTICLES
+   ========================================================= */
+
+.clinic-bg-particle {
+  position: absolute;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: rgba(59, 130, 246, 0.75);
+
+  box-shadow:
+    0 0 10px rgba(59, 130, 246, 0.8),
+    0 0 30px rgba(59, 130, 246, 0.45);
+
+  animation: particleFloat 8s ease-in-out infinite;
+}
+
+.p1 { left: 8%;  top: 12%; }
+.p2 { left: 18%; top: 38%; animation-delay: 1s; }
+.p3 { left: 31%; top: 22%; animation-delay: 2s; }
+.p4 { left: 47%; top: 58%; animation-delay: 3s; }
+.p5 { left: 61%; top: 16%; animation-delay: 4s; }
+.p6 { left: 73%; top: 42%; animation-delay: 2s; }
+.p7 { left: 86%; top: 24%; animation-delay: 5s; }
+.p8 { left: 91%; top: 70%; animation-delay: 1s; }
+.p9 { left: 38%; top: 82%; animation-delay: 4s; }
+.p10 { left: 12%; top: 68%; animation-delay: 6s; }
+
+
+/* =========================================================
+   GLOWING ENERGY POINTS
+   ========================================================= */
+
+.clinic-bg-glow {
+  position: absolute;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: rgba(34, 211, 238, 0.9);
+
+  box-shadow:
+    0 0 20px rgba(34, 211, 238, 0.9),
+    0 0 70px rgba(34, 211, 238, 0.55),
+    0 0 130px rgba(34, 211, 238, 0.25);
+
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+.glow-1 {
+  left: 20%;
+  top: 25%;
+}
+
+.glow-2 {
+  left: 78%;
+  top: 52%;
+  animation-delay: 1.5s;
+}
+
+.glow-3 {
+  left: 48%;
+  top: 78%;
+  animation-delay: 3s;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes blobMove1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  30% {
+    transform: translate(260px, 180px) scale(1.2);
+  }
+
+  65% {
+    transform: translate(100px, 500px) scale(0.85);
+  }
+}
+
+@keyframes blobMove2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  35% {
+    transform: translate(-250px, 250px) scale(1.2);
+  }
+
+  70% {
+    transform: translate(-100px, -180px) scale(0.9);
+  }
+}
+
+@keyframes blobMove3 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(300px, -200px) scale(1.25);
+  }
+}
+
+@keyframes blobMove4 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-250px, 180px) scale(1.15);
+  }
+}
+
+@keyframes gridTravel {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 60px 60px;
+  }
+}
+
+@keyframes ringRotate1 {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes ringRotate2 {
+  from {
+    transform: translateX(-50%) rotate(360deg);
+  }
+
+  to {
+    transform: translateX(-50%) rotate(0deg);
+  }
+}
+
+@keyframes ringRotate3 {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes beamTravel {
+  0% {
+    left: -1300px;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0.7;
+  }
+
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(0.7);
+    opacity: 0.3;
+  }
+
+  25% {
+    transform: translate(40px, -70px) scale(1.4);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(-20px, -120px) scale(0.9);
+    opacity: 0.55;
+  }
+
+  75% {
+    transform: translate(-70px, -40px) scale(1.25);
+    opacity: 0.9;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    transform: scale(0.65);
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+/* =========================================================
+   CLINICFLOW — LET GLOBAL ANIMATION SHOW THROUGH PAGE
+   ========================================================= */
+
+.clinic-global-bg {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Main page stays above the animation */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Large landing sections should not create opaque walls */
+main > section {
+  background-color: transparent !important;
 }
