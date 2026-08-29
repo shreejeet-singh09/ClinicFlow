@@ -231,14 +231,14 @@ export default function LandingPage() {
 
             <div className="hidden items-center gap-3 md:flex">
                 <a
-                    href="/"
+                    href="/login"
                     className="rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
                 >
                     Sign in
                 </a>
 
                 <a
-                    href="/"
+                    href="/login"
                     className="group flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/20"
                 >
                     Let's onboard
@@ -285,14 +285,14 @@ export default function LandingPage() {
 
                     <div className="mt-3 grid grid-cols-2 gap-3">
                         <a
-                            href="/"
+                            href="/login"
                             className="rounded-xl border border-slate-200 px-4 py-3 text-center text-sm font-semibold"
                         >
                             Sign in
                         </a>
 
                         <a
-                            href="/"
+                            href="/login"
                             className="rounded-xl bg-blue-600 px-4 py-3 text-center text-sm font-semibold text-white"
                         >
                             Let's onboard
@@ -346,7 +346,7 @@ export default function LandingPage() {
 
                 <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                     <a
-                        href="/"
+                        href="/login"
                         className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue-600/20 transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-600/30"
                     >
                         <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
@@ -889,7 +889,7 @@ export default function LandingPage() {
                     </p>
 
                     <a
-                        href="/"
+                        href="/login"
                         className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/15 transition duration-300 hover:-translate-y-1 hover:bg-blue-700"
                     >
                         Let's onboard
@@ -952,7 +952,7 @@ export default function LandingPage() {
 
                 <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
                     <a
-                        href="/"
+                        href="/login"
                         className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-blue-600 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
                     >
                         Let's onboard
