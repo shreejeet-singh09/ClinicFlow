@@ -155,13 +155,14 @@ function RegisterClinic({ goBack }) {
 // STAFF SHELL (Doctor + Receptionist)
 // ==================================================================================
 function StaffShell({ profile, clinic, children, activeTab, onTab, onSignOut, extra }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const isReception = profile.role === 'receptionist'
   const items = isReception
     ? [{ k: 'queue', label: 'Live queue', icon: Users }, { k: 'search', label: 'Search', icon: Search }]
     : [{ k: 'overview', label: 'Overview', icon: LayoutDashboard }, { k: 'queue', label: 'Queue', icon: Users }, { k: 'calendar', label: 'Calendar', icon: CalendarDays }, { k: 'staff', label: 'Staff', icon: UserPlus }, { k: 'billing', label: 'Billing', icon: CreditCard }, { k: 'settings', label: 'Clinic settings', icon: Settings }, { k: 'audit', label: 'Audit log', icon: ClipboardList }]
   return (
     <div className="min-h-screen bg-[#f7f9fc] text-slate-900">
-      <aside className="fixed inset-y-0 left-0 z-20 hidden w-[248px] flex-col border-r border-slate-200 bg-white px-5 py-6 lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-20 hidden lg:flex w-[248px] flex-col border-r border-slate-200 bg-white px-5 py-6 lg:flex">
         <div className="flex items-center gap-3 px-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-200"><Activity size={19} /></div><span className="text-lg font-bold tracking-tight">Clinic<span className="text-blue-600">Flow</span></span></div>
         <div className="mt-3 px-2 text-xs font-semibold text-slate-500">{clinic?.name}</div>
         <div className="mt-8 px-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">{isReception ? 'Reception' : 'Owner workspace'}</div>
@@ -184,13 +185,99 @@ function StaffShell({ profile, clinic, children, activeTab, onTab, onSignOut, ex
           </div>
         </div>
       </aside>
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-50">
+          {/* Dark background */}
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setMobileMenuOpen(false)}
+            className="absolute inset-0 bg-black/30"
+          />
+
+          {/* Mobile menu */}
+          <aside className="absolute left-0 top-0 bottom-0 w-[280px] bg-white shadow-xl p-5 flex flex-col">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <div className="text-lg font-bold text-slate-900">
+                  ClinicFlow
+                </div>
+                <div className="text-xs text-slate-500 mt-1">
+                  {clinic?.name}
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="h-9 w-9 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600"
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+
+            <nav className="space-y-1">
+              {items.map(({ k, label, icon: Icon }) => (
+                <button
+                  key={k}
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    onTab(k)
+                  }}
+                  className={`w-full flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium ${activeTab === k
+                      ? 'bg-blue-50 text-blue-700'
+                      : 'text-slate-600 hover:bg-slate-50'
+                    }`}
+                >
+                  <Icon size={18} />
+                  {label}
+                </button>
+              ))}
+            </nav>
+
+            <div className="mt-auto pt-6 border-t border-slate-200">
+              <div className="text-sm font-semibold text-slate-900">
+                {profile.name}
+              </div>
+              <div className="text-xs text-slate-500 mt-1">
+                {profile.email}
+              </div>
+
+              <button
+                type="button"
+                onClick={onSignOut}
+                className="mt-4 w-full flex items-center gap-2 text-sm font-semibold text-slate-600"
+              >
+                <LogOut size={15} />
+                Sign out
+              </button>
+            </div>
+          </aside>
+        </div>
+      )}
       <main className="lg:pl-[248px]">
         <header className="flex h-[76px] items-center justify-between border-b border-slate-200 bg-white px-5 sm:px-8">
           <div>
             <p className="text-xs font-medium text-slate-400">{new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
             <h1 className="mt-0.5 text-lg font-bold text-slate-950">{isReception ? 'Reception desk' : `Good day, ${profile.name}`}</h1>
           </div>
-          <div className="flex items-center gap-3">{extra}<div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700">{profile.name?.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase()}</div></div>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(true)}
+              className="lg:hidden h-9 w-9 rounded-lg border border-slate-200 bg-white flex items-center justify-center text-slate-700"
+              aria-label="Open menu"
+            >
+              <span className="text-xl">☰</span>
+            </button>
+
+            {extra}
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700">
+              {profile.name?.split(' ').map(x => x[0]).join('').slice(0, 2)}
+            </div>
+          </div>
         </header>
         <div className="mx-auto max-w-[1400px] px-5 py-7 sm:px-8">{children}</div>
       </main>
@@ -1063,7 +1150,7 @@ function BillingPanel({ clinicId, onToast }) {
   return (
     <div className="grid gap-6 xl:grid-cols-[1fr_360px]">
       <div className="space-y-6">
-        
+
 
         <section className="rounded-2xl border border-slate-200 bg-white p-6">
           <h3 className="font-bold">Invoices</h3>
