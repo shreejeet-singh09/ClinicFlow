@@ -3,7 +3,7 @@ import { Providers } from './providers'
 import ServiceWorker from '../components/ServiceWorker'
 
 export const metadata = {
-  title: 'ClinicFlow — calm, connected clinic queues',
+  title: 'CarePair — calm, connected clinic queues',
   description: 'A focused multi-tenant queue workspace for modern clinics.',
   manifest: '/manifest.webmanifest',
 }
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         {/* Aggressive stale-cache buster: clears any old service worker + Cache Storage on first load so users don't get stuck on a previous bundle. Runs BEFORE React hydration. */}
         <script dangerouslySetInnerHTML={{__html:`
           (function(){try{
-            var V='clinicflow-2026-08-25e';
+            var V='CarePair-2026-08-25e';
             var prev=localStorage.getItem('cf_v');
             if(prev && prev!==V){
               if('caches' in window){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k)})})}

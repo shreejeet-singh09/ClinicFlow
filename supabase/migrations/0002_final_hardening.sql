@@ -1,4 +1,4 @@
--- ClinicFlow final hardening: immutable public identifiers, privacy-safe patient access,
+-- CarePair final hardening: immutable public identifiers, privacy-safe patient access,
 -- auditable queue transitions, atomic billing, and clinic-level analytics.
 alter table public.clinics add column if not exists slug text;
 alter table public.clinics add column if not exists doctor_name text;

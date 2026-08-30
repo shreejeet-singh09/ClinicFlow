@@ -49,20 +49,20 @@ export default function PublicQueuePage({ params }) {
     setTicket(data)
 
     localStorage.setItem(
-      `clinicflow_ticket_${slug}`,
+      `CarePair_ticket_${slug}`,
       JSON.stringify(data)
     )
 
     setLoading(false)
   }
   useEffect(() => {
-    const savedTicket = localStorage.getItem(`clinicflow_ticket_${slug}`)
+    const savedTicket = localStorage.getItem(`CarePair_ticket_${slug}`)
 
     if (savedTicket) {
       try {
         setTicket(JSON.parse(savedTicket))
       } catch {
-        localStorage.removeItem(`clinicflow_ticket_${slug}`)
+        localStorage.removeItem(`CarePair_ticket_${slug}`)
       }
     }
   }, [slug])

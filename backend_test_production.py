@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ClinicFlow FINAL PRODUCTION PASS Backend Verification
+CarePair FINAL PRODUCTION PASS Backend Verification
 Tests migration 0004: plans, subscriptions, staff invitations, notifications, payment webhooks
 """
 import os
@@ -23,13 +23,13 @@ ANON_KEY = env['NEXT_PUBLIC_SUPABASE_ANON_KEY']
 SERVICE_KEY = env['SUPABASE_SERVICE_ROLE_KEY']
 
 # Test credentials from seed data
-SHARMA_DOCTOR_EMAIL = 'sharma@clinicflow.local'
+SHARMA_DOCTOR_EMAIL = 'sharma@CarePair.local'
 SHARMA_DOCTOR_PASS = 'Doctor@2026'
-SHARMA_RECEPTION_EMAIL = 'reception.sharma@clinicflow.local'
+SHARMA_RECEPTION_EMAIL = 'reception.sharma@CarePair.local'
 SHARMA_RECEPTION_PASS = 'Reception@2026'
-LAKESIDE_DOCTOR_EMAIL = 'anita@clinicflow.local'
+LAKESIDE_DOCTOR_EMAIL = 'anita@CarePair.local'
 LAKESIDE_DOCTOR_PASS = 'Doctor@2026'
-ADMIN_EMAIL = 'admin@clinicflow.local'
+ADMIN_EMAIL = 'admin@CarePair.local'
 ADMIN_PASS = 'Admin@2026'
 
 def log_pass(msg):
@@ -244,7 +244,7 @@ def test_3_existing_regression():
             log_fail(f"Could not get sharma-demo clinic")
         
         # 3c: Sign in as reception.sharma and verify RLS
-        log_info("Testing RLS as reception.sharma@clinicflow.local")
+        log_info("Testing RLS as reception.sharma@CarePair.local")
         token = sign_in(SHARMA_RECEPTION_EMAIL, SHARMA_RECEPTION_PASS)
         if token:
             log_pass(f"Signed in as {SHARMA_RECEPTION_EMAIL}")
@@ -329,7 +329,7 @@ def test_4_staff_invitations():
     print("="*80)
     
     try:
-        # 4a: Sign in as sharma@clinicflow.local (clinic_owner)
+        # 4a: Sign in as sharma@CarePair.local (clinic_owner)
         log_info("Testing staff invitation creation as clinic_owner")
         token = sign_in(SHARMA_DOCTOR_EMAIL, SHARMA_DOCTOR_PASS)
         if not token:
@@ -493,7 +493,7 @@ def test_5_notifications_rls():
     print("="*80)
     
     try:
-        # 5a: Sign in as sharma@clinicflow.local
+        # 5a: Sign in as sharma@CarePair.local
         log_info("Testing notifications RLS as Sharma doctor")
         sharma_token = sign_in(SHARMA_DOCTOR_EMAIL, SHARMA_DOCTOR_PASS)
         if not sharma_token:
@@ -520,7 +520,7 @@ def test_5_notifications_rls():
             )
             sharma_user_id = sharma_user_resp.json().get('id') if sharma_user_resp.status_code == 200 else None
             
-            # 5b: Sign in as anita@clinicflow.local
+            # 5b: Sign in as anita@CarePair.local
             log_info("Testing notifications RLS as Lakeside doctor")
             anita_token = sign_in(LAKESIDE_DOCTOR_EMAIL, LAKESIDE_DOCTOR_PASS)
             if not anita_token:
@@ -735,7 +735,7 @@ def test_8_subscriptions():
     print("="*80)
     
     try:
-        # 8a: Sign in as sharma@clinicflow.local
+        # 8a: Sign in as sharma@CarePair.local
         log_info("Testing subscriptions as Sharma doctor")
         sharma_token = sign_in(SHARMA_DOCTOR_EMAIL, SHARMA_DOCTOR_PASS)
         if not sharma_token:
@@ -771,7 +771,7 @@ def test_8_subscriptions():
         else:
             log_fail(f"Sharma subscriptions query failed: HTTP {sharma_sub_resp.status_code}")
         
-        # 8b: Sign in as anita@clinicflow.local
+        # 8b: Sign in as anita@CarePair.local
         log_info("Testing subscriptions as Lakeside doctor")
         anita_token = sign_in(LAKESIDE_DOCTOR_EMAIL, LAKESIDE_DOCTOR_PASS)
         if not anita_token:
@@ -805,7 +805,7 @@ def test_8_subscriptions():
         else:
             log_fail(f"Anita subscriptions query failed: HTTP {anita_sub_resp.status_code}")
         
-        # 8c: Sign in as admin@clinicflow.local
+        # 8c: Sign in as admin@CarePair.local
         log_info("Testing subscriptions as platform admin")
         admin_token = sign_in(ADMIN_EMAIL, ADMIN_PASS)
         if not admin_token:
@@ -901,7 +901,7 @@ def test_9_security():
 
 def main():
     print("\n" + "="*80)
-    print("ClinicFlow FINAL PRODUCTION PASS Backend Verification")
+    print("CarePair FINAL PRODUCTION PASS Backend Verification")
     print("Migration 0004: Plans, Subscriptions, Staff Invitations, Notifications")
     print("Project: bwomwxtzzhucrplntmtq")
     print("="*80)

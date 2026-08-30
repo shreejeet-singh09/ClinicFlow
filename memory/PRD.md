@@ -1,4 +1,4 @@
-# ClinicFlow MVP PRD
+# CarePair MVP PRD
 
 ## Product
 Multi-tenant clinic queue and waiting-time management SaaS using Supabase PostgreSQL, Auth, Realtime, and RLS.

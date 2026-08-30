@@ -102,12 +102,12 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-## user_problem_statement: ClinicFlow Supabase multi-tenant clinic queue MVP with demo workflow
+## user_problem_statement: CarePair Supabase multi-tenant clinic queue MVP with demo workflow
 ## backend:
 ##   - task: "Supabase migration and API health endpoint"
 ##     implemented: true
 ##     working: NA
-##     file: "supabase/migrations/0001_clinicflow.sql, app/api/[[...path]]/route.js"
+##     file: "supabase/migrations/0001_CarePair.sql, app/api/[[...path]]/route.js"
 ##     stuck_count: 0
 ##     priority: "high"
 ##     needs_retesting: true
@@ -127,7 +127,7 @@
 ##     status_history:
 ##         -working: true
 ##         -agent: "main"
-##         -comment: "Built responsive ClinicFlow workspace with queue actions, pause/resume, calendar metrics, patient join flow, and Supabase-ready product structure."
+##         -comment: "Built responsive CarePair workspace with queue actions, pause/resume, calendar metrics, patient join flow, and Supabase-ready product structure."
 ##
 ## metadata:
 ##   created_by: "main_agent"
@@ -138,7 +138,7 @@
 ## test_plan:
 ##   current_focus:
 ##     - "Verify API health response and migration syntax/tenant policies"
-##     - "Browser-test ClinicFlow doctor/receptionist dashboard and patient queue experience"
+##     - "Browser-test CarePair doctor/receptionist dashboard and patient queue experience"
 ##   stuck_tasks: []
 ##   test_all: false
 ##   test_priority: "high_first"
@@ -150,7 +150,7 @@
 ## Backend testing update (testing agent)
 - working: true
 - needs_retesting: false
-- comment: "Backend verification completed against https://waittime-dashboard-1.preview.emergentagent.com/api using backend_test.py. GET /api returned HTTP 200 with {service: ClinicFlow API, configured: false, database: supabase, realtime: awaiting_env}; POST /api correctly returned HTTP 405. Static migration checks passed for clinic_id tenant columns, RLS on all application tables, role/tenant policies, daily token uniqueness, active-QR security-definer join_clinic_queue RPC boundary, realtime publication tables, and billing_usage visit uniqueness. Supabase migration execution and authenticated/RLS runtime checks remain blocked because no Supabase URL/keys/project are present in environment."
+- comment: "Backend verification completed against https://waittime-dashboard-1.preview.emergentagent.com/api using backend_test.py. GET /api returned HTTP 200 with {service: CarePair API, configured: false, database: supabase, realtime: awaiting_env}; POST /api correctly returned HTTP 405. Static migration checks passed for clinic_id tenant columns, RLS on all application tables, role/tenant policies, daily token uniqueness, active-QR security-definer join_clinic_queue RPC boundary, realtime publication tables, and billing_usage visit uniqueness. Supabase migration execution and authenticated/RLS runtime checks remain blocked because no Supabase URL/keys/project are present in environment."
 
 ## agent_communication
 - agent: "testing"
@@ -180,7 +180,7 @@
 ## Frontend testing update (testing agent)
 - working: true
 - needs_retesting: false
-- comment: "Browser-tested against the configured public URL. ClinicFlow branding, doctor dashboard overview metrics/live queue, receptionist switch, token #44 progression Waiting -> Called -> Consulting -> Completed with toast feedback, pause/resume action disabling and paused banner, queue search filtering, August 2026 calendar with selected-day metrics, patient preview form, token #46/now serving/patients ahead/estimated wait, and return to staff dashboard all passed. No page error or rendered error messages observed."
+- comment: "Browser-tested against the configured public URL. CarePair branding, doctor dashboard overview metrics/live queue, receptionist switch, token #44 progression Waiting -> Called -> Consulting -> Completed with toast feedback, pause/resume action disabling and paused banner, queue search filtering, August 2026 calendar with selected-day metrics, patient preview form, token #46/now serving/patients ahead/estimated wait, and return to staff dashboard all passed. No page error or rendered error messages observed."
 
 ## agent_communication
 - agent: "testing"
@@ -200,7 +200,7 @@
 ## Final hardening backend verification (testing agent)
 - working: true
 - needs_retesting: false
-- comment: "Static verification passed for 0001_clinicflow.sql, 0002_final_hardening.sql, app/api/[[...path]]/route.js, and app/join/[slug]/page.js: unique clinic QR/slug identifiers; clinic_id foreign-key tenant linkage; patient area persistence; opaque token-scoped public_queue_snapshot without patient name/phone/age; enumerated transition_visit valid-state enforcement; finish-only capped billing with unique visit_id usage; monthly cap calculation; audit timestamps/events; clinic membership authorization; and realtime publication. Public GET /api returned HTTP 200 with expected unconfigured Supabase health payload. Authenticated Supabase migration/RLS/RPC/realtime runtime tests are BLOCKED because no Supabase credentials or project are configured; they are not claimed as passed."
+- comment: "Static verification passed for 0001_CarePair.sql, 0002_final_hardening.sql, app/api/[[...path]]/route.js, and app/join/[slug]/page.js: unique clinic QR/slug identifiers; clinic_id foreign-key tenant linkage; patient area persistence; opaque token-scoped public_queue_snapshot without patient name/phone/age; enumerated transition_visit valid-state enforcement; finish-only capped billing with unique visit_id usage; monthly cap calculation; audit timestamps/events; clinic membership authorization; and realtime publication. Public GET /api returned HTTP 200 with expected unconfigured Supabase health payload. Authenticated Supabase migration/RLS/RPC/realtime runtime tests are BLOCKED because no Supabase credentials or project are configured; they are not claimed as passed."
 
 ## agent_communication
 - agent: "testing"
@@ -255,10 +255,10 @@
 - Verified: 8 tables (clinics, profiles, patients, visits, queue_status, billing_usage, platform_settings, audit_events), RLS enabled on all, 9 policies present, RPCs join_clinic_queue/public_queue_snapshot/transition_visit/is_clinic_member deployed, realtime publication contains visits/queue_status/audit_events.
 - Fresh api keys pulled from management API and written to .env (previous anon/service-role were rejected). Supabase Auth admin verified working.
 - Seed script scripts/seed.py created and executed. Real users + clinics created:
-  - Platform admin: admin@clinicflow.local / Admin@2026
-  - Sharma Demo Clinic (ACTIVE): sharma@clinicflow.local / Doctor@2026 (owner); reception.sharma@clinicflow.local / Reception@2026
-  - Lakeside Family Care (ACTIVE): anita@clinicflow.local / Doctor@2026; reception.lakeside@clinicflow.local / Reception@2026
-  - Green Cross Clinic (PENDING_APPROVAL): vikram@clinicflow.local / Doctor@2026
+  - Platform admin: admin@CarePair.local / Admin@2026
+  - Sharma Demo Clinic (ACTIVE): sharma@CarePair.local / Doctor@2026 (owner); reception.sharma@CarePair.local / Reception@2026
+  - Lakeside Family Care (ACTIVE): anita@CarePair.local / Doctor@2026; reception.lakeside@CarePair.local / Reception@2026
+  - Green Cross Clinic (PENDING_APPROVAL): vikram@CarePair.local / Doctor@2026
   - Sample visits inserted for Sharma (5 today: 2 completed, 1 consulting, 2 waiting) + Lakeside (1 completed, 1 waiting) + Sharma yesterday historical (7 completed with billing).
 - app/page.js REWRITTEN as a real Supabase-backed app:
   - Sign-in + sign-up ("Register your clinic") screens using Supabase Auth
@@ -287,9 +287,9 @@
 - Verify GET /api returns configured=true.
 - Verify anon supabase client can call join_clinic_queue RPC for an active clinic and receive an opaque patient_access_token.
 - Verify public_queue_snapshot RPC returns token-scoped data without patient PII (name/phone).
-- Sign in as reception.sharma@clinicflow.local (Reception@2026) and confirm cross-clinic isolation: SELECT visits and clinics returns only Sharma; attempting to update a Lakeside visit or read Lakeside patients is denied.
-- Sign in as anita@clinicflow.local (Doctor@2026) and confirm the same tenant boundary in reverse.
-- Sign in as admin@clinicflow.local (Admin@2026) and confirm they can SELECT all clinics and update platform_settings.
+- Sign in as reception.sharma@CarePair.local (Reception@2026) and confirm cross-clinic isolation: SELECT visits and clinics returns only Sharma; attempting to update a Lakeside visit or read Lakeside patients is denied.
+- Sign in as anita@CarePair.local (Doctor@2026) and confirm the same tenant boundary in reverse.
+- Sign in as admin@CarePair.local (Admin@2026) and confirm they can SELECT all clinics and update platform_settings.
 - Confirm concurrent duplicate transition_visit(COMPLETED) never creates 2 billing rows (unique visit_id constraint).
 - Confirm monthly cap logic in transition_visit: when clinic monthly usage would exceed monthly_cap, additional charge should be 0 (verify via a large synthetic loop if time permits).
 - Confirm audit_events row is created for every transition.
@@ -315,7 +315,7 @@
 - Note: Used service role to get QR code as diagnostic workaround; frontend must either have QR code embedded or RLS policy must be added
 
 **TEST 3: Multi-tenant RLS - Sharma Receptionist - ✅ PASS**
-- ✅ Signed in as reception.sharma@clinicflow.local
+- ✅ Signed in as reception.sharma@CarePair.local
 - ✅ Can only see Sharma clinic (sharma-demo)
 - ✅ Can see only Sharma visits (8 visits for today)
 - ✅ Can see only Sharma patients (15 patients, no Lakeside)
@@ -323,12 +323,12 @@
 - ✅ Can call transition_visit RPC on own visits
 
 **TEST 4: Multi-tenant RLS - Lakeside Doctor - ✅ PASS**
-- ✅ Signed in as anita@clinicflow.local
+- ✅ Signed in as anita@CarePair.local
 - ✅ Can only see Lakeside clinic (lakeside-family-care)
 - ✅ Cannot see Sharma visits - RLS working
 
 **TEST 5: Platform Admin Access - ✅ PASS**
-- ✅ Signed in as admin@clinicflow.local
+- ✅ Signed in as admin@CarePair.local
 - ✅ Can see ALL 3 clinics (sharma-demo, lakeside-family-care, green-cross)
 - ✅ Can update platform_settings (price_per_completed)
 
@@ -355,7 +355,7 @@
 ### Critical Issue Identified:
 
 **RLS Policy Missing for Public Clinic Access:**
-The migration 0001_clinicflow.sql has policy `clinic_member_clinics` that only allows authenticated clinic members or platform admins to read clinics. There is NO policy allowing anon users to read active clinics by slug, which is required for the public patient join flow at /join/[slug].
+The migration 0001_CarePair.sql has policy `clinic_member_clinics` that only allows authenticated clinic members or platform admins to read clinics. There is NO policy allowing anon users to read active clinics by slug, which is required for the public patient join flow at /join/[slug].
 
 Current policy:
 ```sql
@@ -399,13 +399,13 @@ All tests are verification only. The RLS policy issue requires a migration chang
 
 ## Test scope for frontend agent
 Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase project is LIVE. Use demo accounts listed above. Priority flows:
-1. Sign-in as reception.sharma@clinicflow.local; verify queue loads with real 5 sharma visits; execute Call → Start → Finish on a Waiting token; expect toasts + status pill updates; expect billing update visible in doctor overview.
-2. Open a second tab as sharma@clinicflow.local (doctor) and see the same clinic realtime-updated (metrics, queue) while receptionist works in tab 1.
+1. Sign-in as reception.sharma@CarePair.local; verify queue loads with real 5 sharma visits; execute Call → Start → Finish on a Waiting token; expect toasts + status pill updates; expect billing update visible in doctor overview.
+2. Open a second tab as sharma@CarePair.local (doctor) and see the same clinic realtime-updated (metrics, queue) while receptionist works in tab 1.
 3. Public patient join in another window: open /join/sharma-demo, submit form; get token; verify wait-time and status pill; when receptionist calls the token from tab 1, patient page should switch to "You're being called" / "Please enter" within a few seconds via realtime.
-4. Sign in as admin@clinicflow.local; approve/suspend/reactivate a clinic; confirm changes reflect in doctor sign-in (suspended clinic sees ClinicUnavailable).
+4. Sign in as admin@CarePair.local; approve/suspend/reactivate a clinic; confirm changes reflect in doctor sign-in (suspended clinic sees ClinicUnavailable).
 5. Doctor calendar tab: pick yesterday's date; see the 7 seeded completed visits and CSV export button (click it, expect download).
 6. Doctor settings tab: change consultation fee; save; verify updated. Audit log tab shows recent events.
-7. Cross-tenant isolation: sign in as anita@clinicflow.local (Lakeside doctor); confirm workspace shows only Lakeside data (2 visits today, 1 completed).
+7. Cross-tenant isolation: sign in as anita@CarePair.local (Lakeside doctor); confirm workspace shows only Lakeside data (2 visits today, 1 completed).
 8. Offline: with receptionist signed in, use devtools to go offline; click Call on a waiting visit; expect OnlineBadge shows "Offline · N queued" and toast says queued; go back online; verify action drains automatically and status updates in DB.
 9. PWA manifest + SW registration: check `navigator.serviceWorker.controller` is truthy after reload; DevTools > Application should show installable manifest.
 
@@ -417,7 +417,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
 ### Test Results Summary (All 7 Tests):
 
 **TEST 1: Receptionist - Sharma clinic ✅ PASS**
-- Email: reception.sharma@clinicflow.local / Reception@2026
+- Email: reception.sharma@CarePair.local / Reception@2026
 - ✅ NO Account not linked to a clinic error
 - ✅ Landed on RECEPTION DESK workspace
 - ✅ Left rail shows Sharma Demo Clinic
@@ -427,7 +427,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
 - Screenshot: test1_reception_sharma.png
 
 **TEST 2: Doctor - Sharma clinic ✅ PASS**
-- Email: sharma@clinicflow.local / Doctor@2026
+- Email: sharma@CarePair.local / Doctor@2026
 - ✅ NO Account not linked to a clinic error
 - ✅ Landed on OWNER DASHBOARD
 - ✅ Left rail shows Sharma Demo Clinic
@@ -437,7 +437,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
 - Screenshot: test2_doctor_sharma.png
 
 **TEST 3: Doctor - Lakeside clinic ✅ PASS**
-- Email: anita@clinicflow.local / Doctor@2026
+- Email: anita@CarePair.local / Doctor@2026
 - ✅ NO Account not linked to a clinic error
 - ✅ Landed on OWNER DASHBOARD
 - ✅ Left rail shows Lakeside Family Care
@@ -447,7 +447,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
 - Screenshot: test3_doctor_lakeside.png
 
 **TEST 4: Receptionist - Lakeside clinic ✅ PASS**
-- Email: reception.lakeside@clinicflow.local / Reception@2026
+- Email: reception.lakeside@CarePair.local / Reception@2026
 - ✅ NO Account not linked to a clinic error
 - ✅ Landed on RECEPTION DESK workspace
 - ✅ Left rail shows Lakeside Family Care
@@ -457,7 +457,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
 - Screenshot: test4_reception_lakeside.png
 
 **TEST 5: Platform Admin ✅ PASS**
-- Email: admin@clinicflow.local / Admin@2026
+- Email: admin@CarePair.local / Admin@2026
 - ✅ NO Account not linked to a clinic error
 - ✅ Landed on Platform control dashboard
 - ✅ Dark sidebar with PLATFORM CONTROL label visible
@@ -468,7 +468,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
 - Screenshot: test5_platform_admin.png
 
 **TEST 6: Pending clinic doctor ✅ PASS**
-- Email: vikram@clinicflow.local / Doctor@2026
+- Email: vikram@CarePair.local / Doctor@2026
 - ✅ NO Account not linked to a clinic error (CRITICAL: This is the correct behavior)
 - ✅ Shows ClinicUnavailable screen with correct gating message
 - ✅ Message: Your clinic is awaiting platform admin approval
@@ -496,7 +496,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
 - RLS policies are functioning as expected
 
 **✅ Correct Gating Behavior**
-- Test 6 (vikram@clinicflow.local) correctly shows ClinicUnavailable screen with awaiting platform admin approval message
+- Test 6 (vikram@CarePair.local) correctly shows ClinicUnavailable screen with awaiting platform admin approval message
 - This is the EXPECTED behavior for pending clinics, NOT the account not linked bug
 - The distinction between account not linked (bug) and clinic pending approval (correct gating) is clear
 
@@ -605,7 +605,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
     - Screenshot evidence: test11_audit_log.png, r11_audit.png
 
 11. **Cross-tenant isolation (Lakeside)** - PASS
-    - Sign-in as anita@clinicflow.local shows "Lakeside Family Care" in left rail
+    - Sign-in as anita@CarePair.local shows "Lakeside Family Care" in left rail
     - Workspace shows only Lakeside data: 2 visits (Aditi Kulkarni completed, Rohit Deshmukh waiting)
     - NO Sharma Demo Clinic data visible
     - Metrics show: 1 completed, 1 waiting, ₹400 revenue
@@ -613,7 +613,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
 
 12. **Platform admin dashboard** - PASS
     - Dark sidebar with "Platform control" label
-    - "CLINICFLOW PLATFORM" heading
+    - "CarePair PLATFORM" heading
     - All 3 clinics visible in table: Sharma Demo Clinic, Lakeside Family Care, Green Cross Clinic
     - Status badges: ACTIVE, PENDING_APPROVAL, SUSPENDED
     - Action buttons: Approve, Reject, Suspend, Reactivate, Delete
@@ -623,7 +623,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
 
 13. **Suspended clinic gate** - PASS
     - Sharma Demo Clinic suspended via admin
-    - Sign-in as sharma@clinicflow.local shows ClinicUnavailable screen
+    - Sign-in as sharma@CarePair.local shows ClinicUnavailable screen
     - Message: "Your clinic is not active" with status display
     - "Sign out" button available
     - Dashboard NOT accessible
@@ -645,7 +645,7 @@ Run against https://waittime-dashboard-1.preview.emergentagent.com — Supabase 
 
 16. **PWA manifest and service worker** - PASS
     - GET /manifest.webmanifest returns HTTP 200 with valid JSON
-    - Manifest contains: name (ClinicFlow), start_url (/), display (standalone), icons array
+    - Manifest contains: name (CarePair), start_url (/), display (standalone), icons array
     - GET /sw.js returns HTTP 200 with service worker JavaScript
     - SW contains fetch event listeners and caching logic
     - Screenshot evidence: Test run logs confirm both endpoints accessible
@@ -770,7 +770,7 @@ All core functionality is working:
   - /api returns configured=true and payments.configured=false, payments.provider=noop
   - GET /api/plans returns 4 plans
   - Anon cannot read staff_invitations. Doctor can read own clinic invitations only.
-  - Sign in as sharma@clinicflow.local; POST /api/invitations/create with {email,role} succeeds and returns invitation.token. Copy that token.
+  - Sign in as sharma@CarePair.local; POST /api/invitations/create with {email,role} succeeds and returns invitation.token. Copy that token.
   - Anon call rpc/preview_staff_invitation returns {email,role,status,clinic_name,clinic_slug}. No PII beyond invited email.
   - Try accept_staff_invitation while signed in with a DIFFERENT email → must fail 'Signed-in email does not match invited email'.
   - Duplicate accept must fail 'Invitation is accepted'.
@@ -810,14 +810,14 @@ All core functionality is working:
 - ✅ Anon RPC join_clinic_queue works for sharma-demo
 - ✅ Received patient_access_token
 - ✅ public_queue_snapshot returns privacy-safe data (no patient name/phone/age)
-- ✅ Signed in as reception.sharma@clinicflow.local
+- ✅ Signed in as reception.sharma@CarePair.local
 - ⚠️ Minor: Receptionist can see both sharma-demo and lakeside-family-care in clinics query (expected only sharma-demo). However, this does not affect data isolation for visits/patients/actions which are correctly scoped.
 - ✅ Valid transitions work: waiting->called->consulting->completed
 - ✅ Duplicate finish correctly rejected
 - ✅ Exactly one billing_usage row per completed visit
 
 **TEST 4: Staff Invitations Flow - ✅ PASS**
-- ✅ Signed in as sharma@clinicflow.local (clinic_owner)
+- ✅ Signed in as sharma@CarePair.local (clinic_owner)
 - ✅ POST /api/invitations/create succeeded with {email, role}
 - ✅ Received invitation.token
 - ✅ Receptionist cannot create invitations (403 Forbidden)
@@ -830,9 +830,9 @@ All core functionality is working:
 - ✅ Accept after revoke would fail with "Invitation is revoked"
 
 **TEST 5: Notifications RLS - ✅ PASS**
-- ✅ Signed in as sharma@clinicflow.local
+- ✅ Signed in as sharma@CarePair.local
 - ✅ GET /rest/v1/notifications returns only Sharma's notifications
-- ✅ Signed in as anita@clinicflow.local
+- ✅ Signed in as anita@CarePair.local
 - ✅ GET /rest/v1/notifications returns only Anita's notifications
 - ✅ No notification overlap between users (RLS working)
 
@@ -848,12 +848,12 @@ All core functionality is working:
 - ✅ No payment_webhook_events row written (count still 0)
 
 **TEST 8: Subscriptions RLS - ✅ PASS**
-- ✅ Signed in as sharma@clinicflow.local
+- ✅ Signed in as sharma@CarePair.local
 - ✅ GET /rest/v1/subscriptions returns Sharma subscription: status='trialing', plan.code='trial'
-- ✅ Signed in as anita@clinicflow.local
+- ✅ Signed in as anita@CarePair.local
 - ✅ GET /rest/v1/subscriptions returns only Lakeside subscription
 - ✅ No subscription overlap (RLS working)
-- ✅ Signed in as admin@clinicflow.local
+- ✅ Signed in as admin@CarePair.local
 - ✅ Admin sees all subscriptions (2 total)
 
 **TEST 9: Security - ✅ PASS**
@@ -922,8 +922,8 @@ All tests are verification only. The minor RLS observation on clinics table visi
 - ✅ Two password fields visible (New password, Confirm password)
 - ✅ Button correctly disabled without session
 
-**TEST 3: Sign in as sharma@clinicflow.local - verify tabs - ✅ PASS**
-- ✅ Signed in successfully as sharma@clinicflow.local / Doctor@2026
+**TEST 3: Sign in as sharma@CarePair.local - verify tabs - ✅ PASS**
+- ✅ Signed in successfully as sharma@CarePair.local / Doctor@2026
 - ✅ OWNER DASHBOARD loaded
 - ✅ All 7 tabs found in correct order:
   1. Overview ✅
@@ -981,7 +981,7 @@ All tests are verification only. The minor RLS observation on clinics table visi
 - ℹ️ Manual verification recommended
 
 **TEST 8: Regression - receptionist queue - ✅ PASS**
-- ✅ Signed out and signed in as reception.sharma@clinicflow.local / Reception@2026
+- ✅ Signed out and signed in as reception.sharma@CarePair.local / Reception@2026
 - ✅ RECEPTION DESK loaded successfully
 - ✅ Live queue visible with patient tokens
 - ✅ Bell icon (notifications) present in header
@@ -997,7 +997,7 @@ All tests are verification only. The minor RLS observation on clinics table visi
 - ✅ Role gating working correctly - receptionist only sees Live queue and Search tabs
 
 **TEST 9: Regression - cross-tenant isolation (Lakeside) - ✅ PASS**
-- ✅ Signed in as anita@clinicflow.local / Doctor@2026
+- ✅ Signed in as anita@CarePair.local / Doctor@2026
 - ✅ "Lakeside Family Care" visible in left rail
 - ✅ "Sharma Demo Clinic" NOT visible (tenant isolation working)
 - ✅ Clicked Staff tab - only Lakeside staff visible (Dr. Anita Rao, Karthik Iyer)
@@ -1006,7 +1006,7 @@ All tests are verification only. The minor RLS observation on clinics table visi
 - ✅ No cross-tenant data leakage observed
 
 **TEST 10: Regression - admin dashboard - ✅ PASS**
-- ✅ Signed in as admin@clinicflow.local / Admin@2026
+- ✅ Signed in as admin@CarePair.local / Admin@2026
 - ✅ Dark sidebar with "Platform control" label loaded
 - ✅ All 3 clinics visible in table:
   - Sharma Demo Clinic (ACTIVE) ✅
@@ -1020,7 +1020,7 @@ All tests are verification only. The minor RLS observation on clinics table visi
 **TEST 11: PWA manifest and service worker - ✅ PASS**
 - ✅ GET /manifest.webmanifest returns HTTP 200
 - ✅ Manifest contains valid JSON with:
-  - name: "ClinicFlow Queue" ✅
+  - name: "CarePair Queue" ✅
   - start_url: "/" ✅
   - display: "standalone" ✅
   - icons: array present ✅
@@ -1089,7 +1089,7 @@ Manual verification recommended for:
 
 ### Test Results Summary (6 Tests):
 
-**TEST 1: Platform Admin - admin@clinicflow.local / Admin@2026 ✅ PASS**
+**TEST 1: Platform Admin - admin@CarePair.local / Admin@2026 ✅ PASS**
 - ✅ NO "Account not linked to a clinic" error
 - ✅ NO "Complete your clinic setup" screen
 - ✅ Platform control dashboard loaded correctly
@@ -1100,7 +1100,7 @@ Manual verification recommended for:
   - Green Cross Clinic (PENDING_APPROVAL)
 - Screenshot: test1_PASS.png
 
-**TEST 2: Doctor Sharma - sharma@clinicflow.local / Doctor@2026 ✅ PASS**
+**TEST 2: Doctor Sharma - sharma@CarePair.local / Doctor@2026 ✅ PASS**
 - ✅ NO "Account not linked to a clinic" error
 - ✅ NO "Complete your clinic setup" screen
 - ✅ Owner Dashboard loaded correctly
@@ -1109,7 +1109,7 @@ Manual verification recommended for:
 - ✅ All tabs accessible: Overview, Queue, Calendar, Staff, Billing, Clinic settings, Audit log
 - Screenshot: test2_PASS.png
 
-**TEST 3: Receptionist Sharma - reception.sharma@clinicflow.local / Reception@2026 ✅ PASS**
+**TEST 3: Receptionist Sharma - reception.sharma@CarePair.local / Reception@2026 ✅ PASS**
 - ✅ NO "Account not linked to a clinic" error
 - ✅ NO "Complete your clinic setup" screen
 - ✅ Reception desk loaded correctly
@@ -1118,7 +1118,7 @@ Manual verification recommended for:
 - ✅ Queue actions available (Call, Start, Finish, Skip, No-show, Cancel)
 - Screenshot: test3_PASS.png
 
-**TEST 4: Doctor Lakeside - anita@clinicflow.local / Doctor@2026 ✅ PASS**
+**TEST 4: Doctor Lakeside - anita@CarePair.local / Doctor@2026 ✅ PASS**
 - ✅ NO "Account not linked to a clinic" error
 - ✅ NO "Complete your clinic setup" screen
 - ✅ Owner Dashboard loaded correctly
@@ -1146,7 +1146,7 @@ Manual verification recommended for:
 - Note: The registration form is working correctly; the issue is with email validation rejecting the test email format
 
 **TEST 6: Owner settings persistence ✅ PASS**
-- ✅ Signed in as sharma@clinicflow.local
+- ✅ Signed in as sharma@CarePair.local
 - ✅ Navigated to Clinic settings tab
 - ✅ Changed consultation fee from 300 to 333
 - ✅ Clicked "Save changes"
@@ -1207,10 +1207,10 @@ Manual verification recommended for:
 ### Verification Status:
 
 **VERIFIED WORKING (as per review request):**
-1. ✅ Platform admin (admin@clinicflow.local) → Platform Admin dashboard
-2. ✅ Doctor Sharma (sharma@clinicflow.local) → Owner Dashboard for Sharma Demo Clinic
-3. ✅ Receptionist Sharma (reception.sharma@clinicflow.local) → Reception desk for Sharma Demo Clinic
-4. ✅ Doctor Lakeside (anita@clinicflow.local) → Owner Dashboard for Lakeside Family Care
+1. ✅ Platform admin (admin@CarePair.local) → Platform Admin dashboard
+2. ✅ Doctor Sharma (sharma@CarePair.local) → Owner Dashboard for Sharma Demo Clinic
+3. ✅ Receptionist Sharma (reception.sharma@CarePair.local) → Reception desk for Sharma Demo Clinic
+4. ✅ Doctor Lakeside (anita@CarePair.local) → Owner Dashboard for Lakeside Family Care
 5. ⚠️ NEW self-heal registration path → Could not fully test due to email validation error (separate issue)
 6. ✅ Owner settings persistence → Consultation fee update persists correctly
 
@@ -1230,14 +1230,14 @@ The "Account not linked to a clinic" bug is COMPLETELY FIXED. All 4 documented d
 ### Test Results Summary (All 6 Tests PASSED):
 
 **TEST 1: Fresh context - Platform Admin ✅ PASS**
-- Email: admin@clinicflow.local / Admin@2026
+- Email: admin@CarePair.local / Admin@2026
 - ✅ NO "Account not linked to a clinic" error
 - ✅ Landed on Platform Admin dashboard
 - ✅ Found "Platform" content with clinic management table
 - Screenshot: test1_admin_PASS.png
 
 **TEST 2: Fresh context - Doctor Sharma ✅ PASS**
-- Email: sharma@clinicflow.local / Doctor@2026
+- Email: sharma@CarePair.local / Doctor@2026
 - ✅ NO "Account not linked to a clinic" error
 - ✅ Landed on OWNER DASHBOARD
 - ✅ Found "Sharma Demo Clinic" in left rail
@@ -1245,7 +1245,7 @@ The "Account not linked to a clinic" bug is COMPLETELY FIXED. All 4 documented d
 - Screenshot: test2_sharma_doctor_PASS.png
 
 **TEST 3: Fresh context - Receptionist Sharma ✅ PASS**
-- Email: reception.sharma@clinicflow.local / Reception@2026
+- Email: reception.sharma@CarePair.local / Reception@2026
 - ✅ NO "Account not linked to a clinic" error
 - ✅ Landed on RECEPTION DESK
 - ✅ Found "Sharma Demo Clinic" in left rail
@@ -1254,7 +1254,7 @@ The "Account not linked to a clinic" bug is COMPLETELY FIXED. All 4 documented d
 - Screenshot: test3_sharma_reception_PASS.png
 
 **TEST 4: Fresh context - Doctor Lakeside ✅ PASS**
-- Email: anita@clinicflow.local / Doctor@2026
+- Email: anita@CarePair.local / Doctor@2026
 - ✅ NO "Account not linked to a clinic" error
 - ✅ Landed on OWNER DASHBOARD
 - ✅ Found "Lakeside Family Care" in left rail
@@ -1263,18 +1263,18 @@ The "Account not linked to a clinic" bug is COMPLETELY FIXED. All 4 documented d
 - Screenshot: test4_lakeside_doctor_PASS.png
 
 **TEST 5: Stale-cache simulation (the hard case) ✅ PASS**
-- Step 1: Set localStorage 'cf_v' to 'clinicflow-OLD-VERSION' ✅
+- Step 1: Set localStorage 'cf_v' to 'CarePair-OLD-VERSION' ✅
 - Step 2: Registered service worker at scope / ✅
 - Step 3: Reloaded page to trigger cache-buster ✅
-- Step 4: Version updated to 'clinicflow-2026-08-25e' after reload ✅
-- Step 5: Signed in as sharma@clinicflow.local ✅
+- Step 4: Version updated to 'CarePair-2026-08-25e' after reload ✅
+- Step 5: Signed in as sharma@CarePair.local ✅
 - ✅ NO "Account not linked to a clinic" error
 - ✅ Found "Sharma Demo Clinic" + "OWNER DASHBOARD"
 - ✅ Cache-buster successfully self-healed the stale state
 - Screenshot: test5_stale_cache_PASS.png
 
 **TEST 6: HTML head inspection ✅ PASS**
-- ✅ HTML source contains 'clinicflow-2026-08-25e' version string
+- ✅ HTML source contains 'CarePair-2026-08-25e' version string
 - ✅ HTML source contains 'cf_v' localStorage key reference
 - ✅ Cache-buster script present in <head> before React hydration
 
@@ -1283,8 +1283,8 @@ The "Account not linked to a clinic" bug is COMPLETELY FIXED. All 4 documented d
 **✅ PRIMARY SUCCESS CRITERION MET**
 
 The user-reported bug is COMPLETELY FIXED:
-- ✅ Doctor Sharma (sharma@clinicflow.local) reaches OWNER DASHBOARD for Sharma Demo Clinic
-- ✅ Receptionist Sharma (reception.sharma@clinicflow.local) reaches RECEPTION DESK for Sharma Demo Clinic
+- ✅ Doctor Sharma (sharma@CarePair.local) reaches OWNER DASHBOARD for Sharma Demo Clinic
+- ✅ Receptionist Sharma (reception.sharma@CarePair.local) reaches RECEPTION DESK for Sharma Demo Clinic
 - ✅ ZERO instances of "Account not linked to a clinic" error across all 6 tests
 - ✅ Platform Admin works correctly (as it did before)
 - ✅ Doctor Lakeside works correctly with proper tenant isolation
@@ -1292,13 +1292,13 @@ The user-reported bug is COMPLETELY FIXED:
 **✅ STALE-CACHE SELF-HEALING VERIFIED**
 
 TEST 5 proves the cache-buster works as designed:
-1. User has stale version 'clinicflow-OLD-VERSION' in localStorage
+1. User has stale version 'CarePair-OLD-VERSION' in localStorage
 2. User has a registered service worker (simulating cached bundle)
 3. On page reload, the inline <head> script detects version mismatch
 4. Script clears all caches and unregisters service workers
 5. Script triggers ONE automatic reload
 6. After reload, user can sign in successfully with NO errors
-7. Version is updated to 'clinicflow-2026-08-25e'
+7. Version is updated to 'CarePair-2026-08-25e'
 
 **✅ ROOT CAUSE ANALYSIS CONFIRMED**
 

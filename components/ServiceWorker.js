@@ -1,9 +1,9 @@
 'use client'
 import { useEffect } from 'react'
 
-// ClinicFlow app version. Bump this whenever we ship a breaking client change
+// CarePair app version. Bump this whenever we ship a breaking client change
 // so any previously-installed Service Worker + Cache Storage is cleared.
-const APP_VERSION = 'clinicflow-2026-08-25e'
+const APP_VERSION = 'CarePair-2026-08-25e'
 
 export default function ServiceWorker() {
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function ServiceWorker() {
     ;(async () => {
       try {
         // 1) Always self-heal against any older cache. This runs before we register the new SW.
-        const stored = localStorage.getItem('clinicflow_sw_version')
+        const stored = localStorage.getItem('CarePair_sw_version')
         if (stored !== APP_VERSION) {
           if ('caches' in window) {
             const keys = await caches.keys()
@@ -21,7 +21,7 @@ export default function ServiceWorker() {
             const regs = await navigator.serviceWorker.getRegistrations()
             await Promise.all(regs.map(r => r.unregister()))
           }
-          localStorage.setItem('clinicflow_sw_version', APP_VERSION)
+          localStorage.setItem('CarePair_sw_version', APP_VERSION)
           // If we actually cleared something, force one reload so the user sees the fresh HTML.
           if (stored) { window.location.reload(); return }
         }

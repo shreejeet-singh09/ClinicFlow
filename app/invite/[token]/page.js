@@ -78,7 +78,7 @@ export default function InvitationAcceptPage({ params }) {
               <input required type="password" placeholder="Password" value={signup.password} onChange={e => setSignup({ password: e.target.value })} className="mt-2 h-12 w-full rounded-xl border border-slate-200 px-4 text-sm" />
               {err && <p className="mt-3 rounded-lg bg-rose-50 px-3 py-2 text-xs text-rose-700">{err}</p>}
               <button disabled={busy} className="mt-4 h-12 w-full rounded-xl bg-blue-600 text-sm font-bold text-white disabled:opacity-60">{busy ? 'Please wait…' : 'Continue'}</button>
-              <p className="mt-3 text-xs text-slate-500">If you already have a ClinicFlow account for this email, enter its password. Otherwise, we’ll create one.</p>
+              <p className="mt-3 text-xs text-slate-500">If you already have a CarePair account for this email, enter its password. Otherwise, we’ll create one.</p>
             </form>
           )
         )}

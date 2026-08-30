@@ -1,7 +1,7 @@
 export default function manifest() {
   return {
-    name: 'ClinicFlow Queue',
-    short_name: 'ClinicFlow',
+    name: 'CarePair Queue',
+    short_name: 'CarePair',
     description: 'Offline-ready clinic queue workspace',
     start_url: '/',
     display: 'standalone',

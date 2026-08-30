@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ClinicFlow Comprehensive Backend Verification
+CarePair Comprehensive Backend Verification
 Tests multi-tenant RLS, queue transitions, billing, and security
 """
 import os
@@ -23,11 +23,11 @@ ANON_KEY = env['NEXT_PUBLIC_SUPABASE_ANON_KEY']
 SERVICE_KEY = env['SUPABASE_SERVICE_ROLE_KEY']
 
 # Test credentials from seed data
-ADMIN_EMAIL = 'admin@clinicflow.local'
+ADMIN_EMAIL = 'admin@CarePair.local'
 ADMIN_PASS = 'Admin@2026'
-SHARMA_RECEPTION_EMAIL = 'reception.sharma@clinicflow.local'
+SHARMA_RECEPTION_EMAIL = 'reception.sharma@CarePair.local'
 SHARMA_RECEPTION_PASS = 'Reception@2026'
-LAKESIDE_DOCTOR_EMAIL = 'anita@clinicflow.local'
+LAKESIDE_DOCTOR_EMAIL = 'anita@CarePair.local'
 LAKESIDE_DOCTOR_PASS = 'Doctor@2026'
 
 def log_pass(msg):
@@ -719,7 +719,7 @@ def test_9_security():
 
 def main():
     print("\n" + "="*80)
-    print("ClinicFlow Comprehensive Backend Verification")
+    print("CarePair Comprehensive Backend Verification")
     print("Project: bwomwxtzzhucrplntmtq")
     print("="*80)
     

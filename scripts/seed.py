@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Seed real Supabase demo data for ClinicFlow (idempotent).
+"""Seed real Supabase demo data for CarePair (idempotent).
 Creates: platform admin, 3 clinics (Sharma ACTIVE, Lakeside ACTIVE, Green Cross PENDING),
 doctors/receptionists, sample patients, and a today-visit spread."""
 import json, urllib.request, os, sys, time
@@ -43,22 +43,22 @@ def upsert_user(email, password, name):
         raise Exception(f'create user failed {code}: {res}')
     return res['id']
 
-print('== Seeding ClinicFlow ==')
+print('== Seeding CarePair ==')
 
 # ---- Platform admin ----
-admin_id = upsert_user('admin@clinicflow.local', 'Admin@2026', 'Platform Admin')
+admin_id = upsert_user('admin@CarePair.local', 'Admin@2026', 'Platform Admin')
 print('admin', admin_id)
 
 # ---- Clinics ----
 CLINICS = [
     {'slug': 'sharma-demo', 'name': 'Sharma Demo Clinic', 'doctor_name': 'Dr. Sharma', 'address': '124 MG Road, Bengaluru', 'city': 'Bengaluru', 'phone': '+91 98450 12345', 'fee': 300, 'status': 'active',
-     'owner': ('sharma@clinicflow.local', 'Doctor@2026', 'Dr. Sharma'),
-     'recep': ('reception.sharma@clinicflow.local', 'Reception@2026', 'Priya Nair')},
+     'owner': ('sharma@CarePair.local', 'Doctor@2026', 'Dr. Sharma'),
+     'recep': ('reception.sharma@CarePair.local', 'Reception@2026', 'Priya Nair')},
     {'slug': 'lakeside-family-care', 'name': 'Lakeside Family Care', 'doctor_name': 'Dr. Anita Rao', 'address': '18 Lakeside Rd, Pune', 'city': 'Pune', 'phone': '+91 90000 55511', 'fee': 400, 'status': 'active',
-     'owner': ('anita@clinicflow.local', 'Doctor@2026', 'Dr. Anita Rao'),
-     'recep': ('reception.lakeside@clinicflow.local', 'Reception@2026', 'Karthik Iyer')},
+     'owner': ('anita@CarePair.local', 'Doctor@2026', 'Dr. Anita Rao'),
+     'recep': ('reception.lakeside@CarePair.local', 'Reception@2026', 'Karthik Iyer')},
     {'slug': 'green-cross', 'name': 'Green Cross Clinic', 'doctor_name': 'Dr. Vikram Shah', 'address': 'Andheri West, Mumbai', 'city': 'Mumbai', 'phone': '+91 90000 77722', 'fee': 500, 'status': 'pending_approval',
-     'owner': ('vikram@clinicflow.local', 'Doctor@2026', 'Dr. Vikram Shah'),
+     'owner': ('vikram@CarePair.local', 'Doctor@2026', 'Dr. Vikram Shah'),
      'recep': None},
 ]
 
@@ -86,7 +86,7 @@ for c in CLINICS:
         sql(f"insert into public.profiles(id, email, name, role, clinic_id) values('{c['recep_id']}', '{c['recep'][0]}', $${c['recep'][2]}$$, 'receptionist', '{cid}') on conflict (id) do update set clinic_id='{cid}', role='receptionist', name=$${c['recep'][2]}$$;")
 
 # Platform admin profile
-sql(f"insert into public.profiles(id, email, name, role, clinic_id) values('{admin_id}', 'admin@clinicflow.local', 'Platform Admin', 'platform_admin', null) on conflict (id) do update set role='platform_admin', clinic_id=null;")
+sql(f"insert into public.profiles(id, email, name, role, clinic_id) values('{admin_id}', 'admin@CarePair.local', 'Platform Admin', 'platform_admin', null) on conflict (id) do update set role='platform_admin', clinic_id=null;")
 
 print('Clinics:', [(c['slug'], c['id']) for c in CLINICS])
 
@@ -140,9 +140,9 @@ for i in range(1, 8):
     sql(f"insert into public.billing_usage(visit_id, clinic_id, amount, usage_date) values('{v[0]['id']}', '{sharma_id}', 2.50, current_date-1) on conflict(visit_id) do nothing;")
 
 print('== Done. Login credentials ==')
-print('  admin@clinicflow.local / Admin@2026 (platform admin)')
-print('  sharma@clinicflow.local / Doctor@2026 (doctor - Sharma)')
-print('  reception.sharma@clinicflow.local / Reception@2026 (receptionist - Sharma)')
-print('  anita@clinicflow.local / Doctor@2026 (doctor - Lakeside)')
-print('  reception.lakeside@clinicflow.local / Reception@2026 (receptionist - Lakeside)')
-print('  vikram@clinicflow.local / Doctor@2026 (doctor - Green Cross, PENDING)')
+print('  admin@CarePair.local / Admin@2026 (platform admin)')
+print('  sharma@CarePair.local / Doctor@2026 (doctor - Sharma)')
+print('  reception.sharma@CarePair.local / Reception@2026 (receptionist - Sharma)')
+print('  anita@CarePair.local / Doctor@2026 (doctor - Lakeside)')
+print('  reception.lakeside@CarePair.local / Reception@2026 (receptionist - Lakeside)')
+print('  vikram@CarePair.local / Doctor@2026 (doctor - Green Cross, PENDING)')

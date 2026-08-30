@@ -66,10 +66,10 @@ function LoginForm({ onSignedIn, goRegister }) {
     onSignedIn(data.session)
   }
   const demos = [
-    { role: 'Platform admin', email: 'admin@clinicflow.local', pw: 'Admin@2026' },
-    { role: 'Doctor · Sharma', email: 'sharma@clinicflow.local', pw: 'Doctor@2026' },
-    { role: 'Receptionist · Sharma', email: 'reception.sharma@clinicflow.local', pw: 'Reception@2026' },
-    { role: 'Doctor · Lakeside', email: 'anita@clinicflow.local', pw: 'Doctor@2026' },
+    { role: 'Platform admin', email: 'admin@CarePair.local', pw: 'Admin@2026' },
+    { role: 'Doctor · Sharma', email: 'sharma@CarePair.local', pw: 'Doctor@2026' },
+    { role: 'Receptionist · Sharma', email: 'reception.sharma@CarePair.local', pw: 'Reception@2026' },
+    { role: 'Doctor · Lakeside', email: 'anita@CarePair.local', pw: 'Doctor@2026' },
   ]
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#0B1630] p-5 text-slate-900">
@@ -131,7 +131,7 @@ function RegisterClinic({ goBack }) {
     <div className="min-h-screen bg-[#f7f9fc] p-5"><div className="mx-auto max-w-md pt-16 text-center">
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-700"><Check size={28} /></div>
       <h1 className="mt-5 text-2xl font-bold">Registration submitted</h1>
-      <p className="mt-3 text-sm text-slate-500">Your clinic is pending approval from the ClinicFlow platform team. You&apos;ll be able to sign in and manage your queue as soon as it&apos;s approved.</p>
+      <p className="mt-3 text-sm text-slate-500">Your clinic is pending approval from the CarePair platform team. You&apos;ll be able to sign in and manage your queue as soon as it&apos;s approved.</p>
       <button onClick={goBack} className="mt-6 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Back to sign in</button>
     </div></div>
   )
@@ -225,7 +225,7 @@ function StaffShell({ profile, clinic, children, activeTab, onTab, onSignOut, ex
             <div className="flex items-center justify-between mb-8">
               <div>
                 <div className="text-lg font-bold text-slate-900">
-                  ClinicFlow
+                  CarePair
                 </div>
                 <div className="text-xs text-slate-500 mt-1">
                   {clinic?.name}
@@ -721,7 +721,7 @@ function ExportButton({ clinicId, date }) {
       setLoading(true)
       const rows = await getRows()
       const csv = makeCsv(rows)
-      downloadFile(csv, `clinicflow-${date}.csv`, 'text/csv')
+      downloadFile(csv, `CarePair-${date}.csv`, 'text/csv')
     } finally {
       setLoading(false)
     }
@@ -735,7 +735,7 @@ function ExportButton({ clinicId, date }) {
       const doc = new jsPDF()
 
       doc.setFontSize(18)
-      doc.text(clinicId ? 'ClinicFlow Daily Report' : 'ClinicFlow Report', 14, 18)
+      doc.text(clinicId ? 'CarePair Daily Report' : 'CarePair Report', 14, 18)
 
       doc.setFontSize(11)
       doc.text(`Date: ${date}`, 14, 27)
@@ -790,7 +790,7 @@ function ExportButton({ clinicId, date }) {
         y += 6
       })
 
-      doc.save(`clinicflow-${date}.pdf`)
+      doc.save(`CarePair-${date}.pdf`)
     } finally {
       setLoading(false)
     }
@@ -835,7 +835,7 @@ function ExportButton({ clinicId, date }) {
       const [year, month] = date.split('-')
       downloadFile(
         csv,
-        `clinicflow-${year}-${month}.csv`,
+        `CarePair-${year}-${month}.csv`,
         'text/csv;charset=utf-8'
       )
     } catch (err) {
@@ -870,7 +870,7 @@ function ExportButton({ clinicId, date }) {
       })
 
       doc.setFontSize(20)
-      doc.text('ClinicFlow Monthly Report', 20, 20)
+      doc.text('CarePair Monthly Report', 20, 20)
 
       doc.setFontSize(12)
       doc.text(`Month: ${monthName}`, 20, 32)
@@ -959,7 +959,7 @@ function ExportButton({ clinicId, date }) {
         y += 6
       })
 
-      doc.save(`clinicflow-${year}-${month}.pdf`)
+      doc.save(`CarePair-${year}-${month}.pdf`)
     } catch (err) {
       console.error('Monthly PDF export failed:', err)
       alert('Failed to export monthly PDF.')
@@ -1188,7 +1188,7 @@ function AdminDashboard({ profile, onSignOut }) {
         </header>
         <div className="mx-auto max-w-[1400px] px-5 py-7 sm:px-8">
           <div className="mb-8">
-            <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-blue-600"><span className="h-2 w-2 rounded-full bg-blue-500" />CLINICFLOW PLATFORM</div>
+            <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-blue-600"><span className="h-2 w-2 rounded-full bg-blue-500" />CarePair PLATFORM</div>
             <h2 className="text-3xl font-bold tracking-tight text-slate-950">Good day, {profile.name}.</h2>
             <p className="mt-2 text-sm text-slate-500">Approve clinics, protect tenant boundaries, and keep platform revenue visible.</p>
           </div>
@@ -1328,7 +1328,7 @@ function AdminDashboard({ profile, onSignOut }) {
 // PENDING/SUSPENDED clinic messaging
 // ==================================================================================
 function ClinicUnavailable({ profile, clinic, onSignOut }) {
-  const msg = clinic?.status === 'pending_approval' ? 'Your clinic is awaiting platform admin approval.' : clinic?.status === 'suspended' ? 'Your clinic is currently suspended. Please contact ClinicFlow support.' : 'Your clinic is not active.'
+  const msg = clinic?.status === 'pending_approval' ? 'Your clinic is awaiting platform admin approval.' : clinic?.status === 'suspended' ? 'Your clinic is currently suspended. Please contact CarePair support.' : 'Your clinic is not active.'
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#f7f9fc] p-6">
       <div className="max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
@@ -1548,8 +1548,8 @@ function BillingPanel({ clinicId, onToast }) {
 
           <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3 text-center">
             <img
-              src="/clinicflow-payment-qr.jpeg"
-              alt="ClinicFlow UPI payment QR code"
+              src="/CarePair-payment-qr.jpeg"
+              alt="CarePair UPI payment QR code"
               className="mx-auto h-48 w-48 rounded-lg object-contain"
             />
           </div>
@@ -1594,7 +1594,7 @@ function BillingPanel({ clinicId, onToast }) {
 
           <p className="mt-4 text-[11px] leading-4 text-slate-400">
             Your invoice will be marked as paid after the payment is
-            manually verified by ClinicFlow admin.
+            manually verified by CarePair admin.
           </p>
         </div>
       </aside>
@@ -1640,13 +1640,13 @@ export default function App() {
 
   async function signOut() { const sb = supabase(); if (sb) await sb.auth.signOut(); setSession(null); setProfile(null); setClinic(null) }
 
-  if (!ready) return <div className="flex min-h-screen items-center justify-center text-sm text-slate-500">Loading ClinicFlow…</div>
+  if (!ready) return <div className="flex min-h-screen items-center justify-center text-sm text-slate-500">Loading CarePair…</div>
   if (!session) return <SignIn onSignedIn={s => setSession(s)} />
   if (!profile) return (
     <div className="flex min-h-screen items-center justify-center bg-[#f7f9fc] p-6">
       <div className="max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-center">
         <h1 className="text-lg font-bold">Account not linked to a clinic</h1>
-        <p className="mt-2 text-sm text-slate-500">We couldn’t create your profile automatically. Contact the ClinicFlow platform admin.</p>
+        <p className="mt-2 text-sm text-slate-500">We couldn’t create your profile automatically. Contact the CarePair platform admin.</p>
         <button onClick={signOut} className="mt-4 rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold">Sign out</button>
       </div>
     </div>

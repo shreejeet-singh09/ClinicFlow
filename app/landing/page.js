@@ -95,7 +95,7 @@ export default function LandingPage() {
         <main className="relative min-h-screen overflow-hidden bg-white text-slate-950">
 
             {/* =====================================================
-        GLOBAL CLINICFLOW ANIMATION
+        GLOBAL CarePair ANIMATION
         This covers the ENTIRE landing page
         ===================================================== */}
             <div className="clinic-global-bg">
@@ -340,7 +340,7 @@ export default function LandingPage() {
                 </h1>
 
                 <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600">
-                    ClinicFlow brings appointments, queues, patients, staff and
+                    CarePair brings appointments, queues, patients, staff and
                     everyday clinic operations into one simple workspace.
                 </p>
 
@@ -467,7 +467,7 @@ export default function LandingPage() {
 
                                     <div>
                                         <p className="text-[10px] font-medium text-slate-400">
-                                            CLINICFLOW
+                                            CarePair
                                         </p>
 
                                         <p className="text-sm font-bold text-slate-900">
@@ -655,7 +655,7 @@ export default function LandingPage() {
                 </h2>
 
                 <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">
-                    ClinicFlow starts here in India, with a simple mission:
+                    CarePair starts here in India, with a simple mission:
                     make everyday clinic operations easier.
                 </p>
             </div>
@@ -721,7 +721,7 @@ export default function LandingPage() {
                     </h2>
 
                     <p className="mt-6 max-w-xl text-base leading-7 text-slate-600">
-                        India is where ClinicFlow begins. As we grow, our vision is
+                        India is where CarePair begins. As we grow, our vision is
                         to take a simple, connected clinic experience to healthcare
                         teams around the world.
                     </p>
@@ -884,7 +884,7 @@ export default function LandingPage() {
                     </h2>
 
                     <p className="mt-6 max-w-xl leading-7 text-slate-600">
-                        ClinicFlow keeps the complicated parts behind the scenes,
+                        CarePair keeps the complicated parts behind the scenes,
                         so your team can focus on keeping the clinic moving.
                     </p>
 
@@ -946,7 +946,7 @@ export default function LandingPage() {
                 </h2>
 
                 <p className="mx-auto mt-5 max-w-2xl leading-7 text-blue-100 sm:text-lg">
-                    Start your ClinicFlow journey and give your team a simpler way
+                    Start your CarePair journey and give your team a simpler way
                     to manage the day.
                 </p>
 
@@ -993,7 +993,7 @@ export default function LandingPage() {
             </a>
 
             <p className="text-sm text-slate-400">
-                © {new Date().getFullYear()} ClinicFlow.
+                © {new Date().getFullYear()} CarePair.
             </p>
 
             <div className="flex items-center gap-5 text-sm text-slate-200">

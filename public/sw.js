@@ -1,5 +1,5 @@
-/* ClinicFlow service worker: minimal offline shell + safe network-first for API */
-const CACHE = 'clinicflow-shell-v5'
+/* CarePair service worker: minimal offline shell + safe network-first for API */
+const CACHE = 'CarePair-shell-v5'
 const SHELL = ['/', '/manifest.webmanifest']
 
 self.addEventListener('install', event => {

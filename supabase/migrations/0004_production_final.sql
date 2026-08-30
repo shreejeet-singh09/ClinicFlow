@@ -1,4 +1,4 @@
--- ClinicFlow 0004 — Production final: staff invitations, billing, notifications, email templates.
+-- CarePair 0004 — Production final: staff invitations, billing, notifications, email templates.
 -- Idempotent (uses IF NOT EXISTS + DO blocks) so it can safely run against the live project.
 
 -- ================================================================
@@ -249,12 +249,12 @@ do $$ begin
   end if;
 end $$;
 insert into public.email_templates(key, subject, body_html, body_text) values
-  ('email_verification', 'Confirm your ClinicFlow email', '<p>Please confirm your email to activate your ClinicFlow account.</p>', 'Please confirm your email to activate your ClinicFlow account.'),
-  ('password_reset', 'Reset your ClinicFlow password', '<p>Click the link to reset your ClinicFlow password.</p>', 'Click the link to reset your ClinicFlow password.'),
-  ('staff_invitation', 'You have been invited to ClinicFlow', '<p>Your clinic has invited you to join ClinicFlow. Open the invitation link to accept.</p>', 'Your clinic has invited you to join ClinicFlow. Open the invitation link to accept.'),
-  ('clinic_approved', 'Your clinic is approved', '<p>Your ClinicFlow clinic is now active. Sign in to start managing your queue.</p>', 'Your ClinicFlow clinic is now active. Sign in to start managing your queue.'),
-  ('clinic_suspended', 'Your clinic has been suspended', '<p>Your ClinicFlow clinic has been suspended. Contact support.</p>', 'Your ClinicFlow clinic has been suspended. Contact support.'),
-  ('invoice_issued', 'A new ClinicFlow invoice is available', '<p>A new invoice is available in your billing area.</p>', 'A new invoice is available in your billing area.')
+  ('email_verification', 'Confirm your CarePair email', '<p>Please confirm your email to activate your CarePair account.</p>', 'Please confirm your email to activate your CarePair account.'),
+  ('password_reset', 'Reset your CarePair password', '<p>Click the link to reset your CarePair password.</p>', 'Click the link to reset your CarePair password.'),
+  ('staff_invitation', 'You have been invited to CarePair', '<p>Your clinic has invited you to join CarePair. Open the invitation link to accept.</p>', 'Your clinic has invited you to join CarePair. Open the invitation link to accept.'),
+  ('clinic_approved', 'Your clinic is approved', '<p>Your CarePair clinic is now active. Sign in to start managing your queue.</p>', 'Your CarePair clinic is now active. Sign in to start managing your queue.'),
+  ('clinic_suspended', 'Your clinic has been suspended', '<p>Your CarePair clinic has been suspended. Contact support.</p>', 'Your CarePair clinic has been suspended. Contact support.'),
+  ('invoice_issued', 'A new CarePair invoice is available', '<p>A new invoice is available in your billing area.</p>', 'A new invoice is available in your billing area.')
 on conflict (key) do nothing;
 
 -- ================================================================
@@ -274,7 +274,7 @@ begin
     if new.status = 'active' then
       perform public.notify_user(new.owner_user_id, 'CLINIC_APPROVED', 'Your clinic is approved', 'You can now sign in and manage your queue.', jsonb_build_object('clinic_id', new.id), new.id);
     elsif new.status = 'suspended' then
-      perform public.notify_user(new.owner_user_id, 'CLINIC_SUSPENDED', 'Your clinic was suspended', 'Please contact ClinicFlow support.', jsonb_build_object('clinic_id', new.id), new.id);
+      perform public.notify_user(new.owner_user_id, 'CLINIC_SUSPENDED', 'Your clinic was suspended', 'Please contact CarePair support.', jsonb_build_object('clinic_id', new.id), new.id);
     end if;
   end if;
   return new;

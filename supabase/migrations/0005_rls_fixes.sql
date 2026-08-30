@@ -1,4 +1,4 @@
--- ClinicFlow 0005 — RLS fixes for clinic writes + self-registration RPC.
+-- CarePair 0005 — RLS fixes for clinic writes + self-registration RPC.
 -- Root cause of "Account not linked to a clinic":
 --   * There was no INSERT policy on public.clinics, so the "Register your clinic" flow
 --     silently created an auth user but could never create the clinic row, and the

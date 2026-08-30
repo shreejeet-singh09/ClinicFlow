@@ -11,7 +11,7 @@ function serverAdmin() {
 
 function health() {
   return NextResponse.json({
-    service: 'ClinicFlow API',
+    service: 'CarePair API',
     configured: Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
     database: 'supabase',
     realtime: process.env.NEXT_PUBLIC_SUPABASE_URL ? 'ready' : 'awaiting_env',
