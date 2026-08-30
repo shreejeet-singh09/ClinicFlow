@@ -5,6 +5,7 @@ import {
   LockKeyhole, LogOut, Mail, Pause, Play, Plus, QrCode, RefreshCcw, Search, Settings, ShieldCheck,
   Stethoscope, Trash2, UserPlus, Users, X, ClipboardList,
 } from 'lucide-react'
+import { jsPDF } from 'jspdf'
 import { QRCodeSVG } from 'qrcode.react'
 import { getSupabaseBrowser } from '../../lib/supabase-browser'
 import {
@@ -15,6 +16,8 @@ import { fmtINR, estRevenue } from '../../lib/pricing'
 import { fetchClinicEntitlements } from '../../lib/entitlements'
 import { fetchNotifications, markNotificationRead, markAllRead, subscribeNotifications } from '../../lib/notifications'
 import OnlineBadge, { useOnline } from '../../components/OnlineBadge'
+import { BackgroundBeams } from '../../components/ui/background-beams'
+import { BackgroundGradientAnimation } from '../../components/ui/background-gradient-animation'
 
 const supabase = () => getSupabaseBrowser()
 
@@ -69,36 +72,38 @@ function LoginForm({ onSignedIn, goRegister }) {
     { role: 'Doctor · Lakeside', email: 'anita@clinicflow.local', pw: 'Doctor@2026' },
   ]
   return (
-    <div className="min-h-screen bg-[#f7f9fc] p-5 text-slate-900">
-      <div className="mx-auto flex max-w-md flex-col justify-center gap-6 pt-14">
-        <div className="flex items-center gap-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white"><Activity size={19} /></div><span className="text-lg font-bold">Clinic<span className="text-blue-600">Flow</span></span></div>
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Sign in to your clinic workspace</h1>
-          <p className="mt-2 text-sm text-slate-500">Doctors, receptionists, and platform admins share the same login. We route you to the right dashboard automatically.</p>
-        </div>
-        <form onSubmit={submit} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Work email</label>
-          <input required type="email" value={email} onChange={e => setEmail(e.target.value)} className="mt-2 h-12 w-full rounded-xl border border-slate-200 px-4 text-sm outline-none focus:border-blue-400" />
-          <label className="mt-4 block text-xs font-bold uppercase tracking-widest text-slate-400">Password</label>
-          <input required type="password" value={password} onChange={e => setPassword(e.target.value)} className="mt-2 h-12 w-full rounded-xl border border-slate-200 px-4 text-sm outline-none focus:border-blue-400" />
-          {err && <p className="mt-3 rounded-lg bg-rose-50 px-3 py-2 text-xs text-rose-700">{err}</p>}
-          <button disabled={loading} className="mt-5 h-12 w-full rounded-xl bg-blue-600 text-sm font-bold text-white shadow-xl shadow-blue-200 disabled:opacity-60">{loading ? 'Signing in…' : 'Sign in'}</button>
-          <div className="mt-3 text-center"><a href="/reset-password" className="text-xs font-semibold text-slate-500 hover:text-blue-600">Forgot password?</a></div>
-        </form>
-        <button onClick={() => setShowDemos(v => !v)} className="text-xs font-semibold text-slate-500 hover:text-blue-600">{showDemos ? 'Hide' : 'Show'} demo accounts</button>
-        {showDemos && (
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 text-xs">
-            {demos.map(d => (
-              <button key={d.email} onClick={() => { setEmail(d.email); setPassword(d.pw) }} className="flex w-full items-center justify-between rounded-lg px-2 py-2 text-left hover:bg-slate-50">
-                <span><strong>{d.role}</strong><br /><span className="text-slate-500">{d.email} · {d.pw}</span></span>
-                <ArrowRight size={14} />
-              </button>
-            ))}
-          </div>
-        )}
-        <div className="text-center text-xs text-slate-500">New clinic? <button onClick={goRegister} className="font-semibold text-blue-600">Register your clinic</button></div>
+    <div className="relative min-h-screen overflow-hidden bg-[#0B1630] p-5 text-slate-900">
+      <BackgroundBeams />
+      <div className="relative z-10 mx-auto flex max-w-md flex-col justify-center gap-6 pt-14">
+
+
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Sign in to your clinic workspace</h1>
+        <p className="mt-2 text-sm text-slate-500">Doctors, receptionists, and platform admins share the same login. We route you to the right dashboard automatically.</p>
       </div>
+      <form onSubmit={submit} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <label className="text-xs font-bold uppercase tracking-widest text-slate-400">Work email</label>
+        <input required type="email" value={email} onChange={e => setEmail(e.target.value)} className="mt-2 h-12 w-full rounded-xl border border-slate-200 px-4 text-sm outline-none focus:border-blue-400" />
+        <label className="mt-4 block text-xs font-bold uppercase tracking-widest text-slate-400">Password</label>
+        <input required type="password" value={password} onChange={e => setPassword(e.target.value)} className="mt-2 h-12 w-full rounded-xl border border-slate-200 px-4 text-sm outline-none focus:border-blue-400" />
+        {err && <p className="mt-3 rounded-lg bg-rose-50 px-3 py-2 text-xs text-rose-700">{err}</p>}
+        <button disabled={loading} className="mt-5 h-12 w-full rounded-xl bg-blue-600 text-sm font-bold text-white shadow-xl shadow-blue-200 disabled:opacity-60">{loading ? 'Signing in…' : 'Sign in'}</button>
+        <div className="mt-3 text-center"><a href="/reset-password" className="text-xs font-semibold text-slate-500 hover:text-blue-600">Forgot password?</a></div>
+      </form>
+      <button onClick={() => setShowDemos(v => !v)} className="text-xs font-semibold text-slate-500 hover:text-blue-600">{showDemos ? 'Hide' : 'Show'} demo accounts</button>
+      {showDemos && (
+        <div className="rounded-2xl border border-slate-200 bg-white p-4 text-xs">
+          {demos.map(d => (
+            <button key={d.email} onClick={() => { setEmail(d.email); setPassword(d.pw) }} className="flex w-full items-center justify-between rounded-lg px-2 py-2 text-left hover:bg-slate-50">
+              <span><strong>{d.role}</strong><br /><span className="text-slate-500">{d.email} · {d.pw}</span></span>
+              <ArrowRight size={14} />
+            </button>
+          ))}
+        </div>
+      )}
+      <div className="text-center text-xs text-slate-500">New clinic? <button onClick={goRegister} className="font-semibold text-blue-600">Register your clinic</button></div>
     </div>
+    </div >
   )
 }
 
@@ -157,11 +162,31 @@ function RegisterClinic({ goBack }) {
 function StaffShell({ profile, clinic, children, activeTab, onTab, onSignOut, extra }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const isReception = profile.role === 'receptionist'
+
   const items = isReception
-    ? [{ k: 'queue', label: 'Live queue', icon: Users }, { k: 'search', label: 'Search', icon: Search }]
-    : [{ k: 'overview', label: 'Overview', icon: LayoutDashboard }, { k: 'queue', label: 'Queue', icon: Users }, { k: 'calendar', label: 'Calendar', icon: CalendarDays }, { k: 'staff', label: 'Staff', icon: UserPlus }, { k: 'billing', label: 'Billing', icon: CreditCard }, { k: 'settings', label: 'Clinic settings', icon: Settings }, { k: 'audit', label: 'Audit log', icon: ClipboardList }]
+    ? [
+      { k: 'queue', label: 'Live queue', icon: Users },
+      { k: 'search', label: 'Search', icon: Search },
+      { k: 'calendar', label: 'Calendar', icon: CalendarDays }
+    ]
+    : [
+      { k: 'overview', label: 'Overview', icon: LayoutDashboard },
+      { k: 'queue', label: 'Queue', icon: Users },
+      { k: 'calendar', label: 'Calendar', icon: CalendarDays },
+      { k: 'staff', label: 'Staff', icon: UserPlus },
+      { k: 'billing', label: 'Billing', icon: CreditCard },
+      { k: 'settings', label: 'Clinic settings', icon: Settings },
+      { k: 'audit', label: 'Audit log', icon: ClipboardList }
+    ]
+
   return (
-    <div className="min-h-screen bg-[#f7f9fc] text-slate-900">
+  <div className="relative min-h-screen overflow-hidden text-slate-900">
+    <BackgroundGradientAnimation
+      containerClassName="absolute inset-0 h-full w-full"
+      className="absolute inset-0 h-full w-full"
+      interactive={false}
+    />
+    <div className="relative z-10">
       <aside className="fixed inset-y-0 left-0 z-20 hidden lg:flex w-[248px] flex-col border-r border-slate-200 bg-white px-5 py-6 lg:flex">
         <div className="flex items-center gap-3 px-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-200"><Activity size={19} /></div><span className="text-lg font-bold tracking-tight">Clinic<span className="text-blue-600">Flow</span></span></div>
         <div className="mt-3 px-2 text-xs font-semibold text-slate-500">{clinic?.name}</div>
@@ -227,8 +252,8 @@ function StaffShell({ profile, clinic, children, activeTab, onTab, onSignOut, ex
                     onTab(k)
                   }}
                   className={`w-full flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium ${activeTab === k
-                      ? 'bg-blue-50 text-blue-700'
-                      : 'text-slate-600 hover:bg-slate-50'
+                    ? 'bg-blue-50 text-blue-700'
+                    : 'text-slate-600 hover:bg-slate-50'
                     }`}
                 >
                   <Icon size={18} />
@@ -257,7 +282,7 @@ function StaffShell({ profile, clinic, children, activeTab, onTab, onSignOut, ex
           </aside>
         </div>
       )}
-      <main className="lg:pl-[248px]">
+      <main className="relative lg:pl-[248px] overflow-hidden">
         <header className="flex h-[76px] items-center justify-between border-b border-slate-200 bg-white px-5 sm:px-8">
           <div>
             <p className="text-xs font-medium text-slate-400">{new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
@@ -281,6 +306,7 @@ function StaffShell({ profile, clinic, children, activeTab, onTab, onSignOut, ex
         </header>
         <div className="mx-auto max-w-[1400px] px-5 py-7 sm:px-8">{children}</div>
       </main>
+    </div>
     </div>
   )
 }
@@ -538,8 +564,15 @@ function ClinicWorkspace({ profile, onSignOut }) {
         </section>
       )}
 
-      {tab === 'calendar' && !isReception && (
-        <CalendarView selectedDate={selectedDate} setSelectedDate={setSelectedDate} visits={calendarVisits} billing={calendarBilling} clinic={clinic} settings={settings} />
+      {tab === 'calendar' && (
+        <CalendarView
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          visits={calendarVisits}
+          billing={calendarBilling}
+          clinic={clinic}
+          settings={settings}
+        />
       )}
 
       {tab === 'settings' && !isReception && (
@@ -594,14 +627,14 @@ function CalendarView({ selectedDate, setSelectedDate, visits, billing, clinic, 
     <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
       <div className="rounded-2xl border border-slate-200 bg-white p-6">
         <div className="flex items-center justify-between">
-          <button onClick={() => { const nd = new Date(y, m - 1, 1); setSelectedDate(nd.toISOString().slice(0, 10)) }} className="text-slate-500">‹</button>
+          <button onClick={() => { const nd = new Date(y, m - 1, 1); setSelectedDate(`${nd.getFullYear()}-${String(nd.getMonth() + 1).padStart(2, '0')}-01`) }} className="text-slate-500">‹</button>
           <h3 className="font-bold">{first.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}</h3>
-          <button onClick={() => { const nd = new Date(y, m + 1, 1); setSelectedDate(nd.toISOString().slice(0, 10)) }} className="text-slate-500">›</button>
+          <button onClick={() => { const nd = new Date(y, m + 1, 1); setSelectedDate(`${nd.getFullYear()}-${String(nd.getMonth() + 1).padStart(2, '0')}-01`) }} className="text-slate-500">›</button>
         </div>
         <div className="mt-6 grid grid-cols-7 gap-2 text-center text-xs text-slate-400">
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((label, i) => <span key={i} className="py-2 font-semibold">{label}</span>)}
           {days.map((n, i) => n === null ? <span key={i} /> : (
-            <button key={i} onClick={() => setSelectedDate(new Date(y, m, n).toISOString().slice(0, 10))} className={`rounded-lg py-2.5 text-sm ${n === d.getDate() ? 'bg-blue-600 font-bold text-white shadow-lg shadow-blue-200' : 'text-slate-600 hover:bg-blue-50'}`}>{n}</button>
+            <button key={i} onClick={() => setSelectedDate(`${y}-${String(m + 1).padStart(2, '0')}-${String(n).padStart(2, '0')}`)} className={`rounded-lg py-2.5 text-sm ${n === d.getDate() ? 'bg-blue-600 font-bold text-white shadow-lg shadow-blue-200' : 'text-slate-600 hover:bg-blue-50'}`}>{n}</button>
           ))}
         </div>
       </div>
@@ -637,14 +670,346 @@ function CalendarView({ selectedDate, setSelectedDate, visits, billing, clinic, 
 }
 
 function ExportButton({ clinicId, date }) {
-  async function download() {
-    const rows = await fetchVisits(clinicId, date)
-    const header = ['token', 'name', 'age', 'phone', 'area', 'status', 'consultation_duration_seconds', 'called_at', 'started_at', 'finished_at']
-    const csv = [header.join(',')].concat(rows.map(r => [r.token_number, `"${(r.patient?.name || '').replace(/"/g, '""')}"`, r.patient?.age || '', r.patient?.phone || '', r.patient?.area || '', r.status, r.consultation_duration || '', r.called_at || '', r.consultation_started_at || '', r.consultation_finished_at || ''].join(','))).join('\n')
-    const blob = new Blob([csv], { type: 'text/csv' })
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `clinicflow-${date}.csv`; a.click()
+  const [loading, setLoading] = useState(false)
+
+  async function getRows() {
+    return await fetchVisits(clinicId, date)
   }
-  return <button onClick={download} className="rounded-lg border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:border-blue-200 hover:text-blue-600">Export CSV</button>
+
+  function makeCsv(rows) {
+    const header = [
+      'token',
+      'name',
+      'age',
+      'phone',
+      'area',
+      'status',
+      'consultation_duration_seconds',
+      'called_at',
+      'started_at',
+      'finished_at'
+    ]
+
+    const csvRows = rows.map(r => [
+      r.token_number,
+      `"${(r.patient?.name || '').replace(/"/g, '""')}"`,
+      r.patient?.age || '',
+      r.patient?.phone || '',
+      `"${(r.patient?.area || '').replace(/"/g, '""')}"`,
+      r.status,
+      r.consultation_duration || '',
+      r.called_at || '',
+      r.consultation_started_at || '',
+      r.consultation_finished_at || ''
+    ].join(','))
+
+    return [header.join(','), ...csvRows].join('\n')
+  }
+
+  function downloadFile(content, filename, type) {
+    const blob = new Blob([content], { type })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = filename
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  async function downloadCsv() {
+    try {
+      setLoading(true)
+      const rows = await getRows()
+      const csv = makeCsv(rows)
+      downloadFile(csv, `clinicflow-${date}.csv`, 'text/csv')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function downloadPdf() {
+    try {
+      setLoading(true)
+
+      const rows = await getRows()
+      const doc = new jsPDF()
+
+      doc.setFontSize(18)
+      doc.text(clinicId ? 'ClinicFlow Daily Report' : 'ClinicFlow Report', 14, 18)
+
+      doc.setFontSize(11)
+      doc.text(`Date: ${date}`, 14, 27)
+      doc.text(`Total visits: ${rows.length}`, 14, 34)
+
+      const completed = rows.filter(r => r.status === STATUS.COMPLETED).length
+      const cancelled = rows.filter(r => r.status === STATUS.CANCELLED).length
+      const noShow = rows.filter(r => r.status === STATUS.NO_SHOW).length
+
+      doc.text(`Completed: ${completed}`, 14, 41)
+      doc.text(`Cancelled: ${cancelled}`, 70, 41)
+      doc.text(`No-shows: ${noShow}`, 125, 41)
+
+      let y = 52
+
+      doc.setFontSize(9)
+      doc.text('Token', 14, y)
+      doc.text('Patient', 32, y)
+      doc.text('Age', 85, y)
+      doc.text('Status', 105, y)
+      doc.text('Duration', 145, y)
+
+      y += 6
+
+      rows.forEach(r => {
+        if (y > 280) {
+          doc.addPage()
+          y = 18
+
+          doc.setFontSize(9)
+          doc.text('Token', 14, y)
+          doc.text('Patient', 32, y)
+          doc.text('Age', 85, y)
+          doc.text('Status', 105, y)
+          doc.text('Duration', 145, y)
+
+          y += 6
+        }
+
+        const name = String(r.patient?.name || '—').slice(0, 28)
+        const status = String(STATUS_LABEL[r.status] || r.status || '—').slice(0, 16)
+        const duration = r.consultation_duration
+          ? `${Math.round(r.consultation_duration / 60)} min`
+          : '—'
+
+        doc.text(`#${r.token_number || '—'}`, 14, y)
+        doc.text(name, 32, y)
+        doc.text(String(r.patient?.age || '—'), 85, y)
+        doc.text(status, 105, y)
+        doc.text(duration, 145, y)
+
+        y += 6
+      })
+
+      doc.save(`clinicflow-${date}.pdf`)
+    } finally {
+      setLoading(false)
+    }
+  }
+  async function getMonthRows() {
+    const [year, month] = date.split('-').map(Number)
+    const daysInMonth = new Date(year, month, 0).getDate()
+
+    const allRows = []
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayDate =
+        `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+
+      try {
+        const rows = await fetchVisits(clinicId, dayDate)
+
+        if (rows?.length) {
+          allRows.push(...rows)
+        }
+      } catch (err) {
+        console.error(`Failed to fetch ${dayDate}`, err)
+      }
+    }
+
+    return allRows
+  }
+
+  async function downloadMonthCsv() {
+    try {
+      setLoading(true)
+
+      const rows = await getMonthRows()
+
+      if (!rows.length) {
+        alert('No visits found for this month.')
+        return
+      }
+
+      const csv = makeCsv(rows)
+
+      const [year, month] = date.split('-')
+      downloadFile(
+        csv,
+        `clinicflow-${year}-${month}.csv`,
+        'text/csv;charset=utf-8'
+      )
+    } catch (err) {
+      console.error('Monthly CSV export failed:', err)
+      alert('Failed to export monthly CSV.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function downloadMonthPdf() {
+    try {
+      setLoading(true)
+
+      const rows = await getMonthRows()
+
+      if (!rows.length) {
+        alert('No visits found for this month.')
+        return
+      }
+
+      const [year, month] = date.split('-')
+      const doc = new jsPDF()
+
+      const monthName = new Date(
+        Number(year),
+        Number(month) - 1,
+        1
+      ).toLocaleDateString('en-IN', {
+        month: 'long',
+        year: 'numeric'
+      })
+
+      doc.setFontSize(20)
+      doc.text('ClinicFlow Monthly Report', 20, 20)
+
+      doc.setFontSize(12)
+      doc.text(`Month: ${monthName}`, 20, 32)
+      doc.text(`Total visits: ${rows.length}`, 20, 42)
+
+      const completed = rows.filter(
+        r => r.status === STATUS.COMPLETED
+      ).length
+
+      const cancelled = rows.filter(
+        r => r.status === STATUS.CANCELLED
+      ).length
+
+      const noshows = rows.filter(
+        r => r.status === STATUS.NO_SHOW
+      ).length
+
+      doc.text(`Completed: ${completed}`, 20, 52)
+      doc.text(`Cancelled: ${cancelled}`, 80, 52)
+      doc.text(`No-shows: ${noshows}`, 140, 52)
+
+      let y = 68
+
+      doc.setFontSize(9)
+      doc.text(
+        'Date',
+        15,
+        y
+      )
+      doc.text(
+        'Token',
+        40,
+        y
+      )
+      doc.text(
+        'Patient',
+        65,
+        y
+      )
+      doc.text(
+        'Age',
+        115,
+        y
+      )
+      doc.text(
+        'Status',
+        135,
+        y
+      )
+      doc.text(
+        'Duration',
+        175,
+        y
+      )
+
+      y += 7
+
+      rows.forEach((r) => {
+        if (y > 280) {
+          doc.addPage()
+          y = 20
+        }
+
+        const visitDate = (
+          r.consultation_started_at ||
+          r.called_at ||
+          r.created_at ||
+          ''
+        ).slice(0, 10)
+
+        const patientName = (r.patient?.name || '').slice(0, 22)
+
+        doc.text(visitDate, 15, y)
+        doc.text(String(r.token_number || ''), 40, y)
+        doc.text(patientName, 65, y)
+        doc.text(String(r.patient?.age || ''), 115, y)
+        doc.text(String(r.status || ''), 135, y)
+        doc.text(
+          r.consultation_duration
+            ? `${r.consultation_duration} min`
+            : '—',
+          175,
+          y
+        )
+
+        y += 6
+      })
+
+      doc.save(`clinicflow-${year}-${month}.pdf`)
+    } catch (err) {
+      console.error('Monthly PDF export failed:', err)
+      alert('Failed to export monthly PDF.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      <button
+        onClick={downloadCsv}
+        disabled={loading}
+        className="rounded-lg border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:border-blue-200 hover:text-blue-600 disabled:opacity-50"
+      >
+        {loading ? 'Preparing…' : 'Export CSV'}
+      </button>
+
+      <button
+        onClick={downloadPdf}
+        disabled={loading}
+        className="rounded-lg border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:border-blue-200 hover:text-blue-600 disabled:opacity-50"
+      >
+        Export PDF
+      </button>
+      <div className="w-full mt-4 pt-4 border-t border-slate-100">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          Monthly report
+        </p>
+
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={downloadMonthCsv}
+            disabled={loading}
+            className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 hover:border-blue-200 hover:text-blue-600 disabled:opacity-50"
+          >
+            {loading ? 'Preparing...' : 'Export Month CSV'}
+          </button>
+
+          <button
+            onClick={downloadMonthPdf}
+            disabled={loading}
+            className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 hover:border-blue-200 hover:text-blue-600 disabled:opacity-50"
+          >
+            {loading ? 'Preparing...' : 'Export Month PDF'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 function SettingsPanel({ clinic, onSaved, onToast, publicUrl }) {
