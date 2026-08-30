@@ -191,7 +191,7 @@ export default function LandingPage() {
                 </div>
 
                 <span className="text-xl font-bold tracking-tight">
-                    <span className="text-blue-600">Clinic</span>Flow
+                    <span className="text-blue-600">Care</span>Pair
                 </span>
             </a>
 
@@ -988,7 +988,7 @@ export default function LandingPage() {
                 </div>
 
                 <span className="font-bold tracking-tight">
-                    <span className="text-blue-600">Clinic</span>Flow
+                    <span className="text-blue-600">Care</span>Pair
                 </span>
             </a>
 
