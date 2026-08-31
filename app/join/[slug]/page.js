@@ -267,7 +267,7 @@ if (snapshot) {
 
       <div className="mx-auto max-w-md">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2"><div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white"><Activity size={16} /></div><span className="font-bold">Clinic<span className="text-blue-600">Flow</span></span></div>
+          <div className="flex items-center gap-2"><div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white"><Activity size={16} /></div><span className="font-bold">Care<span className="text-blue-600">Pair</span></span></div>
           <span className="text-xs font-semibold text-emerald-600">● Live queue</span>
         </div>
         <div className="mt-10 text-center">
@@ -299,7 +299,7 @@ if (snapshot) {
 return (
   <div className="min-h-screen bg-[#f7f9fc] px-5 py-8 text-slate-900">
     <div className="mx-auto max-w-md">
-      <div className="flex items-center gap-2"><div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white"><Activity size={16} /></div><span className="font-bold">Clinic<span className="text-blue-600">Flow</span></span></div>
+      <div className="flex items-center gap-2"><div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white"><Activity size={16} /></div><span className="font-bold">Care<span className="text-blue-600">Pair</span></span></div>
       <div className="mt-12">
         <p className="text-sm font-semibold text-blue-600">JOIN CLINIC QUEUE</p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight">{clinic?.name || 'Loading clinic\u2026'}</h1>

@@ -188,7 +188,7 @@ function StaffShell({ profile, clinic, children, activeTab, onTab, onSignOut, ex
     />
     <div className="relative z-10">
       <aside className="fixed inset-y-0 left-0 z-20 hidden lg:flex w-[248px] flex-col border-r border-slate-200 bg-white px-5 py-6 lg:flex">
-        <div className="flex items-center gap-3 px-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-200"><Activity size={19} /></div><span className="text-lg font-bold tracking-tight">Clinic<span className="text-blue-600">Flow</span></span></div>
+        <div className="flex items-center gap-3 px-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-200"><Activity size={19} /></div><span className="text-lg font-bold tracking-tight">Care<span className="text-blue-600">Pair</span></span></div>
         <div className="mt-3 px-2 text-xs font-semibold text-slate-500">{clinic?.name}</div>
         <div className="mt-8 px-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">{isReception ? 'Reception' : 'Owner workspace'}</div>
         <nav className="mt-3 space-y-1">
@@ -1171,7 +1171,7 @@ function AdminDashboard({ profile, onSignOut }) {
   return (
     <div className="min-h-screen bg-[#f7f9fc] text-slate-900">
       <aside className="fixed inset-y-0 left-0 z-20 hidden  w-[248px] flex-col border-r border-slate-800 bg-slate-950 px-5 py-6 text-white lg:flex">
-        <div className="flex items-center gap-3 px-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500"><Activity size={19} /></div><span className="text-lg font-bold">Clinic<span className="text-blue-400">Flow</span></span></div>
+        <div className="flex items-center gap-3 px-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500"><Activity size={19} /></div><span className="text-lg font-bold">Care<span className="text-blue-400">Pair</span></span></div>
         <div className="mt-10 px-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Platform control</div>
         <nav className="mt-3 space-y-1">
           <button className="flex w-full items-center gap-3 rounded-xl bg-white/10 px-3 py-3 text-sm font-semibold text-white"><LayoutDashboard size={17} /> Overview</button>
@@ -1674,7 +1674,7 @@ function CompleteClinicSetup({ profile, onDone, onSignOut }) {
   return (
     <div className="min-h-screen bg-[#f7f9fc] p-5">
       <div className="mx-auto max-w-lg pt-10">
-        <div className="flex items-center gap-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white"><Activity size={19} /></div><span className="text-lg font-bold">Clinic<span className="text-blue-600">Flow</span></span></div>
+        <div className="flex items-center gap-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white"><Activity size={19} /></div><span className="text-lg font-bold">Care<span className="text-blue-600">Pair</span></span></div>
         <h1 className="mt-6 text-3xl font-bold tracking-tight">Complete your clinic setup</h1>
         <p className="mt-2 text-sm text-slate-500">Signed in as <strong>{profile.email}</strong>. Tell us about your clinic — an admin will approve it shortly.</p>
         <form onSubmit={submit} className="mt-6 space-y-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">

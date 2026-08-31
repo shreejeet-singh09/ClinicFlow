@@ -23,7 +23,7 @@ export default function ResetPasswordPage() {
   return (
     <div className="min-h-screen bg-[#f7f9fc] p-5">
       <div className="mx-auto max-w-md pt-14">
-        <div className="flex items-center gap-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white"><Activity size={19} /></div><span className="text-lg font-bold">Clinic<span className="text-blue-600">Flow</span></span></div>
+        <div className="flex items-center gap-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white"><Activity size={19} /></div><span className="text-lg font-bold">Care<span className="text-blue-600">Pair</span></span></div>
         <h1 className="mt-8 text-3xl font-bold tracking-tight">Reset your password</h1>
         <p className="mt-2 text-sm text-slate-500">Enter your work email and we’ll send a reset link.</p>
         <form onSubmit={submit} className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">

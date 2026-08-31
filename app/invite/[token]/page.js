@@ -57,7 +57,7 @@ export default function InvitationAcceptPage({ params }) {
   return (
     <div className="min-h-screen bg-[#f7f9fc] p-5">
       <div className="mx-auto max-w-md pt-14">
-        <div className="flex items-center gap-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white"><Activity size={19} /></div><span className="text-lg font-bold">Clinic<span className="text-blue-600">Flow</span></span></div>
+        <div className="flex items-center gap-2"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white"><Activity size={19} /></div><span className="text-lg font-bold">Care<span className="text-blue-600">Pair</span></span></div>
         <h1 className="mt-8 text-3xl font-bold tracking-tight">Join {preview.clinic_name}</h1>
         <p className="mt-2 text-sm text-slate-500">You’ve been invited as <strong>{preview.role}</strong> for <strong>{preview.clinic_name}</strong>. This invitation was sent to <strong>{preview.email}</strong>.</p>
         {preview.status !== 'pending' && <p className="mt-4 rounded-lg bg-amber-50 px-3 py-3 text-sm text-amber-800">This invitation is {preview.status}.</p>}

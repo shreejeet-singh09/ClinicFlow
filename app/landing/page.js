@@ -517,7 +517,7 @@ export default function LandingPage() {
                                         </p>
 
                                         <p className="mt-1 text-[10px] text-slate-400">
-                                            Real-time clinic flow
+                                            Real-time care pair
                                         </p>
                                     </div>
 
