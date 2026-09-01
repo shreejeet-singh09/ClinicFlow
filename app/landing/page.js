@@ -164,868 +164,1050 @@ export default function LandingPage() {
 
             </div>
 
-    {/* ============================================================
+            {/* ============================================================
           NAVBAR
       ============================================================ */}
 
-    <header
-        className={`sticky top-0 z-50 border-b transition-all duration-500 ${scrolled
-            ? "border-slate-200 bg-blue-50/95 shadow-sm backdrop-blur-2xl"
-    : "border-transparent bg-blue-50/80 backdrop-blur-xl"
-            }`}
-    >
-        <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6 lg:px-8">
-            {/* Logo */}
-
-            <a
-                href="/landing"
-                className="group flex items-center gap-3"
+            <header
+                className={`sticky top-0 z-50 border-b transition-all duration-500 ${scrolled
+                    ? "border-slate-200 bg-blue-50/95 shadow-sm backdrop-blur-2xl"
+                    : "border-transparent bg-blue-50/80 backdrop-blur-xl"
+                    }`}
             >
-                <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm transition duration-300 group-hover:rotate-3 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-600/25">
-                    <Activity
-                        size={20}
-                        strokeWidth={2.4}
-                    />
+                <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6 lg:px-8">
+                    {/* Logo */}
 
-                    <span className="absolute inset-0 rounded-xl border border-white/30" />
-                </div>
+                    <a
+                        href="/landing"
+                        className="group flex items-center gap-3"
+                    >
+                        <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm transition duration-300 group-hover:rotate-3 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-600/25">
+                            <Activity
+                                size={20}
+                                strokeWidth={2.4}
+                            />
 
-                <span className="text-xl font-bold tracking-tight">
-                    <span className="text-blue-600">Care</span>Pair
-                </span>
-            </a>
+                            <span className="absolute inset-0 rounded-xl border border-white/30" />
+                        </div>
 
-            {/* Desktop navigation */}
+                        <span className="text-xl font-bold tracking-tight">
+                            <span className="text-blue-600">Care</span>Pair
+                        </span>
+                    </a>
 
-            <nav className="hidden items-center gap-8 md:flex">
-                <a
-                    href="#features"
-                    className="nav-link"
-                >
-                    Features
-                </a>
+                    {/* Desktop navigation */}
 
-                <a
-                    href="#how-it-works"
-                    className="nav-link"
-                >
-                    How it works
-                </a>
-
-                <a
-                    href="#journey"
-                    className="nav-link"
-                >
-                    Our journey
-                </a>
-
-                <a
-                    href="#about"
-                    className="nav-link"
-                >
-                    About
-                </a>
-            </nav>
-
-            {/* Desktop buttons */}
-
-            <div className="hidden items-center gap-3 md:flex">
-                <a
-                    href="/login"
-                    className="rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
-                >
-                    Sign in
-                </a>
-
-                <a
-                    href="/login"
-                    className="group flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/20"
-                >
-                    Let's onboard
-                    <ArrowRight
-                        size={16}
-                        className="transition-transform duration-300 group-hover:translate-x-1"
-                    />
-                </a>
-            </div>
-
-            {/* Mobile menu */}
-
-            <button
-                type="button"
-                onClick={() => setMobileMenu(!mobileMenu)}
-                className="rounded-xl p-2 text-slate-700 transition hover:bg-slate-100 md:hidden"
-            >
-                {mobileMenu ? (
-                    <X size={24} />
-                ) : (
-                    <Menu size={24} />
-                )}
-            </button>
-        </div>
-
-        {mobileMenu && (
-            <div className="border-t border-slate-100 bg-white px-6 py-5 md:hidden">
-                <nav className="flex flex-col gap-2">
-                    {[
-                        ["Features", "#features"],
-                        ["How it works", "#how-it-works"],
-                        ["Our journey", "#journey"],
-                        ["About", "#about"],
-                    ].map(([label, href]) => (
+                    <nav className="hidden items-center gap-8 md:flex">
                         <a
-                            key={label}
-                            href={href}
-                            onClick={() => setMobileMenu(false)}
-                            className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                            href="#features"
+                            className="nav-link"
                         >
-                            {label}
+                            Features
                         </a>
-                    ))}
 
-                    <div className="mt-3 grid grid-cols-2 gap-3">
+                        <a
+                            href="#how-it-works"
+                            className="nav-link"
+                        >
+                            How it works
+                        </a>
+
+                        <a
+                            href="#pricing"
+                            className="nav-link"
+                        >
+                            Pricing
+                        </a>
+
+                        <a
+                            href="#journey"
+                            className="nav-link"
+                        >
+                            Our journey
+                        </a>
+
+                        <a
+                            href="#about"
+                            className="nav-link"
+                        >
+                            About
+                        </a>
+                    </nav>
+
+                    {/* Desktop buttons */}
+
+                    <div className="hidden items-center gap-3 md:flex">
                         <a
                             href="/login"
-                            className="rounded-xl border border-slate-200 px-4 py-3 text-center text-sm font-semibold"
+                            className="rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
                         >
                             Sign in
                         </a>
 
                         <a
                             href="/login"
-                            className="rounded-xl bg-blue-600 px-4 py-3 text-center text-sm font-semibold text-white"
+                            className="group flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/20"
                         >
                             Let's onboard
+                            <ArrowRight
+                                size={16}
+                                className="transition-transform duration-300 group-hover:translate-x-1"
+                            />
                         </a>
                     </div>
-                </nav>
-            </div>
-        )}
-    </header>
 
-    {/* ============================================================
+                    {/* Mobile menu */}
+
+                    <button
+                        type="button"
+                        onClick={() => setMobileMenu(!mobileMenu)}
+                        className="rounded-xl p-2 text-slate-700 transition hover:bg-slate-100 md:hidden"
+                    >
+                        {mobileMenu ? (
+                            <X size={24} />
+                        ) : (
+                            <Menu size={24} />
+                        )}
+                    </button>
+                </div>
+
+                {mobileMenu && (
+                    <div className="border-t border-slate-100 bg-white px-6 py-5 md:hidden">
+                        <nav className="flex flex-col gap-2">
+                            {[
+                                ["Features", "#features"],
+                                ["How it works", "#how-it-works"],
+                                ["Pricing", "#pricing"],
+                                ["Our journey", "#journey"],
+                                ["About", "#about"],
+                            ].map(([label, href]) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    onClick={() => setMobileMenu(false)}
+                                    className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                                >
+                                    {label}
+                                </a>
+                            ))}
+
+                            <div className="mt-3 grid grid-cols-2 gap-3">
+                                <a
+                                    href="/login"
+                                    className="rounded-xl border border-slate-200 px-4 py-3 text-center text-sm font-semibold"
+                                >
+                                    Sign in
+                                </a>
+
+                                <a
+                                    href="/login"
+                                    className="rounded-xl bg-blue-600 px-4 py-3 text-center text-sm font-semibold text-white"
+                                >
+                                    Let's onboard
+                                </a>
+                            </div>
+                        </nav>
+                    </div>
+                )}
+            </header>
+
+            {/* ============================================================
           HERO
       ============================================================ */}
 
-    <section className="relative z-10 overflow-hidden">
-        {/* Animated grid */}
+            <section className="relative z-10 overflow-hidden">
+                {/* Animated grid */}
 
-        <div className="pointer-events-none absolute inset-0 opacity-[0.35]">
-            <div className="hero-grid absolute inset-0" />
-        </div>
-
-        {/* Decorative blobs */}
-
-        <div className="pointer-events-none absolute left-[45%] top-[80px] h-[420px] w-[420px] animate-[pulseGlow_6s_ease-in-out_infinite] rounded-full bg-blue-200/25 blur-3xl" />
-
-        <div className="pointer-events-none absolute right-[-100px] top-[250px] h-[300px] w-[300px] rounded-full bg-indigo-100/30 blur-3xl" />
-
-        <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-6 pb-20 pt-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:pb-28 lg:pt-28">
-            {/* Hero copy */}
-
-            <div className="cf-reveal reveal-left">
-                <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50/80 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm backdrop-blur">
-                    <Sparkles
-                        size={15}
-                        className="animate-pulse"
-                    />
-                    Built for modern clinics
+                <div className="pointer-events-none absolute inset-0 opacity-[0.35]">
+                    <div className="hero-grid absolute inset-0" />
                 </div>
 
-                <h1 className="max-w-3xl text-5xl font-bold leading-[1.02] tracking-[-0.055em] sm:text-6xl lg:text-[72px]">
-                    Run your clinic.
-                    <span className="gradient-text mt-2 block">
-                        Without the chaos.
-                    </span>
-                </h1>
+                {/* Decorative blobs */}
 
-                <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600">
-                    CarePair brings appointments, queues, patients, staff and
-                    everyday clinic operations into one simple workspace.
-                </p>
+                <div className="pointer-events-none absolute left-[45%] top-[80px] h-[420px] w-[420px] animate-[pulseGlow_6s_ease-in-out_infinite] rounded-full bg-blue-200/25 blur-3xl" />
 
-                <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                    <a
-                        href="/login"
-                        className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue-600/20 transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-600/30"
-                    >
-                        <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                <div className="pointer-events-none absolute right-[-100px] top-[250px] h-[300px] w-[300px] rounded-full bg-indigo-100/30 blur-3xl" />
 
-                        <span className="relative">
-                            Let's onboard
-                        </span>
+                <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-6 pb-20 pt-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:pb-28 lg:pt-28">
+                    {/* Hero copy */}
 
-                        <ArrowRight
-                            size={17}
-                            className="relative transition-transform duration-300 group-hover:translate-x-1"
-                        />
-                    </a>
+                    <div className="cf-reveal reveal-left">
+                        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50/80 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm backdrop-blur">
+                            <Sparkles
+                                size={15}
+                                className="animate-pulse"
+                            />
+                            Built for modern clinics
+                        </div>
 
-                    <a
-                        href="/"
-                        className="group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
-                    >
-                        Sign in
-                        <ChevronRight
-                            size={16}
-                            className="transition-transform duration-300 group-hover:translate-x-1"
-                        />
-                    </a>
-                </div>
+                        <h1 className="max-w-3xl text-5xl font-bold leading-[1.02] tracking-[-0.055em] sm:text-6xl lg:text-[72px]">
+                            Run your clinic.
+                            <span className="gradient-text mt-2 block">
+                                Without the chaos.
+                            </span>
+                        </h1>
 
-                {/* Benefits */}
+                        <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600">
+                            CarePair brings appointments, queues, patients, staff and
+                            everyday clinic operations into one simple workspace.
+                        </p>
 
-                <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-                    <TrustItem
-                        icon={<ShieldCheck size={17} />}
-                        text="Secure & reliable"
-                    />
+                        <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                            <a
+                                href="/login"
+                                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue-600/20 transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-600/30"
+                            >
+                                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
-                    <TrustItem
-                        icon={<Check size={17} />}
-                        text="Simple to use"
-                    />
+                                <span className="relative">
+                                    Let's onboard
+                                </span>
 
-                    <TrustItem
-                        icon={<Users size={17} />}
-                        text="Built for clinics"
-                    />
-                </div>
-            </div>
+                                <ArrowRight
+                                    size={17}
+                                    className="relative transition-transform duration-300 group-hover:translate-x-1"
+                                />
+                            </a>
 
-            {/* Dashboard */}
+                            <a
+                                href="/"
+                                className="group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
+                            >
+                                Sign in
+                                <ChevronRight
+                                    size={16}
+                                    className="transition-transform duration-300 group-hover:translate-x-1"
+                                />
+                            </a>
+                        </div>
 
-            <div className="cf-reveal reveal-right relative">
-                {/* Floating card */}
+                        {/* Benefits */}
 
-                <div className="float-card absolute -left-7 top-14 z-20 hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl sm:block">
-                    <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50">
-                            <Check
-                                size={18}
-                                className="text-emerald-600"
+                        <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+                            <TrustItem
+                                icon={<ShieldCheck size={17} />}
+                                text="Secure & reliable"
+                            />
+
+                            <TrustItem
+                                icon={<Check size={17} />}
+                                text="Simple to use"
+                            />
+
+                            <TrustItem
+                                icon={<Users size={17} />}
+                                text="Built for clinics"
                             />
                         </div>
-
-                        <div>
-                            <p className="text-[11px] font-medium text-slate-400">
-                                Queue updated
-                            </p>
-
-                            <p className="text-sm font-bold text-slate-900">
-                                Patient #12 ready
-                            </p>
-                        </div>
                     </div>
-                </div>
 
-                {/* Floating right card */}
+                    {/* Dashboard */}
 
-                <div className="float-card-delay absolute -right-5 bottom-16 z-20 hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl sm:block">
-                    <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50">
-                            <HeartPulse
-                                size={18}
-                                className="text-blue-600"
-                            />
-                        </div>
+                    <div className="cf-reveal reveal-right relative">
+                        {/* Floating card */}
 
-                        <div>
-                            <p className="text-[11px] font-medium text-slate-400">
-                                Today's flow
-                            </p>
-
-                            <p className="text-sm font-bold text-slate-900">
-                                Running smoothly
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Main dashboard */}
-
-                <div className="dashboard-float relative rounded-[30px] border border-slate-200 bg-white/95 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.12)] backdrop-blur-xl">
-                    <div className="overflow-hidden rounded-[24px] bg-slate-50">
-                        {/* Fake browser bar */}
-
-                        <div className="flex items-center gap-2 border-b border-slate-200 bg-white px-5 py-4">
-                            <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
-                            <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
-                            <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
-
-                            <div className="ml-4 h-7 flex-1 rounded-lg bg-slate-50" />
-                        </div>
-
-                        <div className="p-5">
-                            {/* App top */}
-
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white">
-                                        <Activity size={18} />
-                                    </div>
-
-                                    <div>
-                                        <p className="text-[10px] font-medium text-slate-400">
-                                            CarePair
-                                        </p>
-
-                                        <p className="text-sm font-bold text-slate-900">
-                                            Dashboard
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                                    Live
-                                </div>
-                            </div>
-
-                            {/* Stats */}
-
-                            <div className="mt-6 grid grid-cols-3 gap-3">
-                                <DashboardStat
-                                    icon={<Users size={14} />}
-                                    label="Patients"
-                                    value="48"
-                                    detail="+12%"
-                                />
-
-                                <DashboardStat
-                                    icon={<Clock3 size={14} />}
-                                    label="In queue"
-                                    value="12"
-                                    detail="3 urgent"
-                                />
-
-                                <DashboardStat
-                                    icon={<CalendarDays size={14} />}
-                                    label="Appointments"
-                                    value="24"
-                                    detail="Today"
-                                />
-                            </div>
-
-                            {/* Queue */}
-
-                            <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <p className="text-xs font-bold text-slate-900">
-                                            Today's queue
-                                        </p>
-
-                                        <p className="mt-1 text-[10px] text-slate-400">
-                                            Real-time care pair
-                                        </p>
-                                    </div>
-
-                                    <span className="text-[10px] font-bold text-blue-600">
-                                        View all
-                                    </span>
-                                </div>
-
-                                <div className="mt-4 space-y-2">
-                                    <QueueItem
-                                        number="1"
-                                        name="Ramesh Kumar"
-                                        status="Consultation"
-                                        active
-                                    />
-
-                                    <QueueItem
-                                        number="2"
-                                        name="Priya Sharma"
-                                        status="Waiting"
-                                    />
-
-                                    <QueueItem
-                                        number="3"
-                                        name="Amit Verma"
-                                        status="Waiting"
+                        <div className="float-card absolute -left-7 top-14 z-20 hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl sm:block">
+                            <div className="flex items-center gap-3">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50">
+                                    <Check
+                                        size={18}
+                                        className="text-emerald-600"
                                     />
                                 </div>
+
+                                <div>
+                                    <p className="text-[11px] font-medium text-slate-400">
+                                        Queue updated
+                                    </p>
+
+                                    <p className="text-sm font-bold text-slate-900">
+                                        Patient #12 ready
+                                    </p>
+                                </div>
                             </div>
+                        </div>
 
-                            {/* Bottom */}
+                        {/* Floating right card */}
 
-                            <div className="mt-4 grid grid-cols-2 gap-3">
-                                <div className="rounded-2xl border border-slate-200 bg-white p-4">
+                        <div className="float-card-delay absolute -right-5 bottom-16 z-20 hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl sm:block">
+                            <div className="flex items-center gap-3">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50">
+                                    <HeartPulse
+                                        size={18}
+                                        className="text-blue-600"
+                                    />
+                                </div>
+
+                                <div>
+                                    <p className="text-[11px] font-medium text-slate-400">
+                                        Today's flow
+                                    </p>
+
+                                    <p className="text-sm font-bold text-slate-900">
+                                        Running smoothly
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Main dashboard */}
+
+                        <div className="dashboard-float relative rounded-[30px] border border-slate-200 bg-white/95 p-3 shadow-[0_30px_80px_rgba(15,23,42,0.12)] backdrop-blur-xl">
+                            <div className="overflow-hidden rounded-[24px] bg-slate-50">
+                                {/* Fake browser bar */}
+
+                                <div className="flex items-center gap-2 border-b border-slate-200 bg-white px-5 py-4">
+                                    <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
+                                    <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
+                                    <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
+
+                                    <div className="ml-4 h-7 flex-1 rounded-lg bg-slate-50" />
+                                </div>
+
+                                <div className="p-5">
+                                    {/* App top */}
+
                                     <div className="flex items-center justify-between">
-                                        <p className="text-[10px] font-semibold text-slate-400">
-                                            Weekly consultations
-                                        </p>
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white">
+                                                <Activity size={18} />
+                                            </div>
 
-                                        <Activity
-                                            size={14}
-                                            className="text-blue-600"
+                                            <div>
+                                                <p className="text-[10px] font-medium text-slate-400">
+                                                    CarePair
+                                                </p>
+
+                                                <p className="text-sm font-bold text-slate-900">
+                                                    Dashboard
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700">
+                                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                                            Live
+                                        </div>
+                                    </div>
+
+                                    {/* Stats */}
+
+                                    <div className="mt-6 grid grid-cols-3 gap-3">
+                                        <DashboardStat
+                                            icon={<Users size={14} />}
+                                            label="Patients"
+                                            value="48"
+                                            detail="+12%"
+                                        />
+
+                                        <DashboardStat
+                                            icon={<Clock3 size={14} />}
+                                            label="In queue"
+                                            value="12"
+                                            detail="3 urgent"
+                                        />
+
+                                        <DashboardStat
+                                            icon={<CalendarDays size={14} />}
+                                            label="Appointments"
+                                            value="24"
+                                            detail="Today"
                                         />
                                     </div>
 
-                                    <div className="mt-4 flex h-16 items-end gap-1.5">
-                                        {[35, 50, 42, 68, 58, 78, 92].map(
-                                            (height, index) => (
-                                                <div
-                                                    key={index}
-                                                    className="group/bar flex-1"
-                                                >
-                                                    <div
-                                                        style={{
-                                                            height: `${height}%`,
-                                                        }}
-                                                        className="rounded-t-md bg-blue-100 transition-all duration-500 group-hover/bar:bg-blue-500"
-                                                    />
-                                                </div>
-                                            )
-                                        )}
+                                    {/* Queue */}
+
+                                    <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
+                                        <div className="flex items-center justify-between">
+                                            <div>
+                                                <p className="text-xs font-bold text-slate-900">
+                                                    Today's queue
+                                                </p>
+
+                                                <p className="mt-1 text-[10px] text-slate-400">
+                                                    Real-time care pair
+                                                </p>
+                                            </div>
+
+                                            <span className="text-[10px] font-bold text-blue-600">
+                                                View all
+                                            </span>
+                                        </div>
+
+                                        <div className="mt-4 space-y-2">
+                                            <QueueItem
+                                                number="1"
+                                                name="Ramesh Kumar"
+                                                status="Consultation"
+                                                active
+                                            />
+
+                                            <QueueItem
+                                                number="2"
+                                                name="Priya Sharma"
+                                                status="Waiting"
+                                            />
+
+                                            <QueueItem
+                                                number="3"
+                                                name="Amit Verma"
+                                                status="Waiting"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Bottom */}
+
+                                    <div className="mt-4 grid grid-cols-2 gap-3">
+                                        <div className="rounded-2xl border border-slate-200 bg-white p-4">
+                                            <div className="flex items-center justify-between">
+                                                <p className="text-[10px] font-semibold text-slate-400">
+                                                    Weekly consultations
+                                                </p>
+
+                                                <Activity
+                                                    size={14}
+                                                    className="text-blue-600"
+                                                />
+                                            </div>
+
+                                            <div className="mt-4 flex h-16 items-end gap-1.5">
+                                                {[35, 50, 42, 68, 58, 78, 92].map(
+                                                    (height, index) => (
+                                                        <div
+                                                            key={index}
+                                                            className="group/bar flex-1"
+                                                        >
+                                                            <div
+                                                                style={{
+                                                                    height: `${height}%`,
+                                                                }}
+                                                                className="rounded-t-md bg-blue-100 transition-all duration-500 group-hover/bar:bg-blue-500"
+                                                            />
+                                                        </div>
+                                                    )
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="rounded-2xl border border-slate-200 bg-white p-4">
+                                            <p className="text-[10px] font-semibold text-slate-400">
+                                                Average wait
+                                            </p>
+
+                                            <p className="mt-3 text-2xl font-bold text-slate-900">
+                                                12m
+                                            </p>
+
+                                            <p className="mt-1 text-[10px] font-semibold text-emerald-600">
+                                                ↓ 18% today
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div className="rounded-2xl border border-slate-200 bg-white p-4">
-                                    <p className="text-[10px] font-semibold text-slate-400">
-                                        Average wait
-                                    </p>
-
-                                    <p className="mt-3 text-2xl font-bold text-slate-900">
-                                        12m
-                                    </p>
-
-                                    <p className="mt-1 text-[10px] font-semibold text-emerald-600">
-                                        ↓ 18% today
-                                    </p>
-                                </div>
                             </div>
+                        </div>
+
+                        {/* Decorative dots */}
+
+                        <div className="pointer-events-none absolute -bottom-8 -right-8 grid grid-cols-5 gap-2 opacity-40">
+                            {Array.from({ length: 25 }).map((_, index) => (
+                                <span
+                                    key={index}
+                                    className="h-1 w-1 rounded-full bg-blue-400"
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
 
-                {/* Decorative dots */}
+                {/* Scroll indicator */}
 
-                <div className="pointer-events-none absolute -bottom-8 -right-8 grid grid-cols-5 gap-2 opacity-40">
-                    {Array.from({ length: 25 }).map((_, index) => (
-                        <span
-                            key={index}
-                            className="h-1 w-1 rounded-full bg-blue-400"
-                        />
-                    ))}
-                </div>
-            </div>
-        </div>
+                <a
+                    href="#journey"
+                    className="group absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-slate-400 transition hover:text-blue-600 lg:flex"
+                >
+                    <span className="text-[10px] font-bold uppercase tracking-[0.25em]">
+                        Scroll to explore
+                    </span>
 
-        {/* Scroll indicator */}
+                    <span className="flex h-9 w-9 animate-bounce items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm">
+                        <ArrowDown size={15} />
+                    </span>
+                </a>
+            </section>
 
-        <a
-            href="#journey"
-            className="group absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-slate-400 transition hover:text-blue-600 lg:flex"
-        >
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em]">
-                Scroll to explore
-            </span>
-
-            <span className="flex h-9 w-9 animate-bounce items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm">
-                <ArrowDown size={15} />
-            </span>
-        </a>
-    </section>
-
-    {/* ============================================================
+            {/* ============================================================
           INDIA / MARQUEE
       ============================================================ */}
 
-    <section
-        id="journey"
-       className="relative z-10 overflow-hidden border-y border-slate-100 bg-white/40 py-24"
-    >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="cf-reveal text-center">
-                <div className="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white px-5 py-2.5 shadow-sm">
-                    <span className="text-2xl">🇮🇳</span>
+            <section
+                id="journey"
+                className="relative z-10 overflow-hidden border-y border-slate-100 bg-white/40 py-24"
+            >
+                <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div className="cf-reveal text-center">
+                        <div className="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white px-5 py-2.5 shadow-sm">
+                            <span className="text-2xl">🇮🇳</span>
 
-                    <span className="text-sm font-bold text-slate-800">
-                        Starting in India
-                    </span>
+                            <span className="text-sm font-bold text-slate-800">
+                                Starting in India
+                            </span>
+                        </div>
+
+                        <h2 className="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
+                            Run the clinic.
+                            <span className="block text-blue-600">
+                                Not the chaos.
+                            </span>
+                        </h2>
+
+                        <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">
+                            CarePair starts here in India, with a simple mission:
+                            make everyday clinic operations easier.
+                        </p>
+                    </div>
+
+                    {/* Marquee */}
+
+                    <div className="cf-reveal reveal-up relative mt-16 overflow-hidden">
+                        <div className="pointer-events-none absolute left-0 top-0 z-20 h-full w-32 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent" />
+
+                        <div className="pointer-events-none absolute right-0 top-0 z-20 h-full w-32 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent" />
+
+                        <div className="clinic-marquee flex w-max gap-4">
+                            {[...clinics, ...clinics].map(
+                                (clinic, index) => (
+                                    <div
+                                        key={`${clinic}-${index}`}
+                                        className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-6 py-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-900/5"
+                                    >
+                                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 transition duration-300 group-hover:bg-blue-600">
+                                            <HeartPulse
+                                                size={17}
+                                                className="text-blue-600 transition duration-300 group-hover:text-white"
+                                            />
+                                        </div>
+
+                                        <span className="whitespace-nowrap text-sm font-bold text-slate-700">
+                                            {clinic}
+                                        </span>
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="cf-reveal mt-10 text-center">
+                        <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-400">
+                            Building the future of clinic management
+                        </p>
+                    </div>
                 </div>
+            </section>
 
-                <h2 className="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
-                    Run the clinic.
-                    <span className="block text-blue-600">
-                        Not the chaos.
-                    </span>
-                </h2>
-
-                <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">
-                    CarePair starts here in India, with a simple mission:
-                    make everyday clinic operations easier.
-                </p>
-            </div>
-
-            {/* Marquee */}
-
-            <div className="cf-reveal reveal-up relative mt-16 overflow-hidden">
-                <div className="pointer-events-none absolute left-0 top-0 z-20 h-full w-32 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent" />
-
-                <div className="pointer-events-none absolute right-0 top-0 z-20 h-full w-32 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent" />
-
-                <div className="clinic-marquee flex w-max gap-4">
-                    {[...clinics, ...clinics].map(
-                        (clinic, index) => (
-                            <div
-                                key={`${clinic}-${index}`}
-                                className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-6 py-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-900/5"
-                            >
-                                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 transition duration-300 group-hover:bg-blue-600">
-                                    <HeartPulse
-                                        size={17}
-                                        className="text-blue-600 transition duration-300 group-hover:text-white"
-                                    />
-                                </div>
-
-                                <span className="whitespace-nowrap text-sm font-bold text-slate-700">
-                                    {clinic}
-                                </span>
-                            </div>
-                        )
-                    )}
-                </div>
-            </div>
-
-            <div className="cf-reveal mt-10 text-center">
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-400">
-                    Building the future of clinic management
-                </p>
-            </div>
-        </div>
-    </section>
-
-    {/* ============================================================
+            {/* ============================================================
           GLOBAL EXPANSION
       ============================================================ */}
 
-    <section
-        id="about"
-        className="relative z-10 overflow-hidden bg-white py-28"
-    >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="grid items-center gap-16 lg:grid-cols-[0.85fr_1.15fr]">
-                <div className="cf-reveal reveal-left">
-                    <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-                        The journey ahead
-                    </p>
-
-                    <h2 className="mt-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-                        Start local.
-                        <span className="block text-blue-600">
-                            Think global.
-                        </span>
-                    </h2>
-
-                    <p className="mt-6 max-w-xl text-base leading-7 text-slate-600">
-                        India is where CarePair begins. As we grow, our vision is
-                        to take a simple, connected clinic experience to healthcare
-                        teams around the world.
-                    </p>
-
-                    <div className="mt-9 flex items-center gap-4">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
-                            <Activity size={21} />
-                        </div>
-
-                        <div>
-                            <p className="text-sm font-bold">
-                                Built to grow
+            <section
+                id="about"
+                className="relative z-10 overflow-hidden bg-white py-28"
+            >
+                <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div className="grid items-center gap-16 lg:grid-cols-[0.85fr_1.15fr]">
+                        <div className="cf-reveal reveal-left">
+                            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+                                The journey ahead
                             </p>
 
-                            <p className="mt-1 text-sm text-slate-500">
-                                One platform, many possibilities.
+                            <h2 className="mt-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+                                Start local.
+                                <span className="block text-blue-600">
+                                    Think global.
+                                </span>
+                            </h2>
+
+                            <p className="mt-6 max-w-xl text-base leading-7 text-slate-600">
+                                India is where CarePair begins. As we grow, our vision is
+                                to take a simple, connected clinic experience to healthcare
+                                teams around the world.
                             </p>
-                        </div>
-                    </div>
-                </div>
 
-                {/* Countries */}
-
-                <div className="cf-reveal reveal-right relative">
-                    <div className="absolute left-[12%] right-[12%] top-1/2 hidden h-px bg-slate-200 sm:block" />
-
-                    <div className="relative grid grid-cols-2 gap-4 sm:grid-cols-4">
-                        {countries.map(
-                            (country, index) => (
-                                <div
-                                    key={country.name}
-                                    className={`country-card group relative ${country.active
-                                        ? "border-blue-200 shadow-lg shadow-blue-600/10"
-                                        : "border-slate-200"
-                                        }`}
-                                    style={{
-                                        animationDelay: `${index * 120}ms`,
-                                    }}
-                                >
-                                    <div className="country-flag mx-auto">
-                                        {country.flag}
-                                    </div>
-
-                                    <p className="mt-4 text-sm font-bold text-slate-900">
-                                        {country.name}
-                                    </p>
-
-                                    <p
-                                        className={`mt-1 text-xs ${country.active
-                                            ? "font-semibold text-blue-600"
-                                            : "text-slate-400"
-                                            }`}
-                                    >
-                                        {country.status}
-                                    </p>
-
-                                    {country.active && (
-                                        <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white shadow-md">
-                                            <Check size={13} />
-                                        </div>
-                                    )}
+                            <div className="mt-9 flex items-center gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                                    <Activity size={21} />
                                 </div>
-                            )
-                        )}
+
+                                <div>
+                                    <p className="text-sm font-bold">
+                                        Built to grow
+                                    </p>
+
+                                    <p className="mt-1 text-sm text-slate-500">
+                                        One platform, many possibilities.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Countries */}
+
+                        <div className="cf-reveal reveal-right relative">
+                            <div className="absolute left-[12%] right-[12%] top-1/2 hidden h-px bg-slate-200 sm:block" />
+
+                            <div className="relative grid grid-cols-2 gap-4 sm:grid-cols-4">
+                                {countries.map(
+                                    (country, index) => (
+                                        <div
+                                            key={country.name}
+                                            className={`country-card group relative ${country.active
+                                                ? "border-blue-200 shadow-lg shadow-blue-600/10"
+                                                : "border-slate-200"
+                                                }`}
+                                            style={{
+                                                animationDelay: `${index * 120}ms`,
+                                            }}
+                                        >
+                                            <div className="country-flag mx-auto">
+                                                {country.flag}
+                                            </div>
+
+                                            <p className="mt-4 text-sm font-bold text-slate-900">
+                                                {country.name}
+                                            </p>
+
+                                            <p
+                                                className={`mt-1 text-xs ${country.active
+                                                    ? "font-semibold text-blue-600"
+                                                    : "text-slate-400"
+                                                    }`}
+                                            >
+                                                {country.status}
+                                            </p>
+
+                                            {country.active && (
+                                                <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white shadow-md">
+                                                    <Check size={13} />
+                                                </div>
+                                            )}
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    {/* ============================================================
+            {/* ============================================================
           FEATURES
       ============================================================ */}
 
-    <section
-        id="features"
-        className="relative z-10 bg-transparent py-28"
-    >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="cf-reveal mx-auto max-w-2xl text-center">
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-                    One workspace
-                </p>
+            <section
+                id="features"
+                className="relative z-10 bg-transparent py-28"
+            >
+                <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div className="cf-reveal mx-auto max-w-2xl text-center">
+                        <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+                            One workspace
+                        </p>
 
-                <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
-                    Everything your clinic needs.
-                </h2>
+                        <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
+                            Everything your clinic needs.
+                        </h2>
 
-                <p className="mt-5 leading-7 text-slate-600">
-                    Designed around the everyday work your team already does.
-                </p>
-            </div>
+                        <p className="mt-5 leading-7 text-slate-600">
+                            Designed around the everyday work your team already does.
+                        </p>
+                    </div>
 
-            <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                <FeatureCard
-                    delay="0ms"
-                    icon={<Users size={21} />}
-                    title="Patient management"
-                    description="Keep patient information organized and accessible to the right people."
-                />
+                    <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                        <FeatureCard
+                            delay="0ms"
+                            icon={<Users size={21} />}
+                            title="Patient management"
+                            description="Keep patient information organized and accessible to the right people."
+                        />
 
-                <FeatureCard
-                    delay="100ms"
-                    icon={<CalendarDays size={21} />}
-                    title="Appointments"
-                    description="Keep schedules organized and make the day's appointments easy to follow."
-                />
+                        <FeatureCard
+                            delay="100ms"
+                            icon={<CalendarDays size={21} />}
+                            title="Appointments"
+                            description="Keep schedules organized and make the day's appointments easy to follow."
+                        />
 
-                <FeatureCard
-                    delay="200ms"
-                    icon={<Clock3 size={21} />}
-                    title="Queue management"
-                    description="See who is waiting, who is next and how your clinic is flowing."
-                />
+                        <FeatureCard
+                            delay="200ms"
+                            icon={<Clock3 size={21} />}
+                            title="Queue management"
+                            description="See who is waiting, who is next and how your clinic is flowing."
+                        />
 
-                <FeatureCard
-                    delay="300ms"
-                    icon={<ShieldCheck size={21} />}
-                    title="Clinic workspace"
-                    description="Give your team a structured workspace with clear roles and access."
-                />
+                        <FeatureCard
+                            delay="300ms"
+                            icon={<ShieldCheck size={21} />}
+                            title="Clinic workspace"
+                            description="Give your team a structured workspace with clear roles and access."
+                        />
 
-                <FeatureCard
-                    delay="400ms"
-                    icon={<Activity size={21} />}
-                    title="Clinic insights"
-                    description="Understand the numbers that matter across your everyday clinic operations."
-                />
+                        <FeatureCard
+                            delay="400ms"
+                            icon={<Activity size={21} />}
+                            title="Clinic insights"
+                            description="Understand the numbers that matter across your everyday clinic operations."
+                        />
 
-                <FeatureCard
-                    delay="500ms"
-                    icon={<HeartPulse size={21} />}
-                    title="Built for healthcare"
-                    description="A workflow designed around clinics rather than generic business software."
-                />
-            </div>
-        </div>
-    </section>
+                        <FeatureCard
+                            delay="500ms"
+                            icon={<HeartPulse size={21} />}
+                            title="Built for healthcare"
+                            description="A workflow designed around clinics rather than generic business software."
+                        />
+                    </div>
+                </div>
+            </section>
+            {/* ============================================================
+      PRICING
+  ============================================================ */}
 
-    {/* ============================================================
+            <section
+                id="pricing"
+                className="relative z-10 overflow-hidden bg-white py-28"
+            >
+                <div className="mx-auto max-w-7xl px-6 lg:px-8">
+
+                    {/* Heading */}
+                    <div className="cf-reveal mx-auto max-w-2xl text-center">
+
+                        <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+                            Simple pricing
+                        </p>
+
+                        <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
+                            Pay for the patients you complete.
+                        </h2>
+
+                        <p className="mx-auto mt-5 max-w-2xl leading-7 text-slate-600">
+                            Simple usage-based pricing built for Indian clinics.
+                            Pay ₹2.50 for every completed patient, with a maximum
+                            monthly charge of ₹5,000.
+                        </p>
+
+                    </div>
+
+
+                    {/* Pricing Card */}
+                    <div className="cf-reveal reveal-up relative mx-auto mt-14 max-w-4xl">
+
+                        {/* Glow */}
+                        <div className="absolute -inset-4 rounded-[38px] bg-blue-100/40 blur-3xl" />
+
+                        <div className="relative overflow-hidden rounded-[32px] border border-blue-100 bg-white shadow-[0_30px_80px_rgba(37,99,235,0.12)]">
+
+                            <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
+
+
+                                {/* LEFT SIDE */}
+                                <div className="p-8 sm:p-12">
+
+                                    <div className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] text-blue-700">
+
+                                        <span className="h-2 w-2 rounded-full bg-blue-600" />
+
+                                        Built for Indian clinics
+
+                                    </div>
+
+
+                                    {/* Price */}
+                                    <div className="mt-8 flex items-end gap-3">
+
+                                        <span className="text-6xl font-bold tracking-[-0.05em] text-slate-950 sm:text-7xl">
+                                            ₹2.50
+                                        </span>
+
+                                        <span className="pb-3 text-sm font-semibold text-slate-500">
+                                            / completed patient
+                                        </span>
+
+                                    </div>
+
+
+                                    <p className="mt-5 max-w-xl text-base leading-7 text-slate-600">
+                                        Your bill grows with your clinic's usage —
+                                        but never exceeds ₹5,000 in a month.
+                                    </p>
+
+
+                                    {/* Benefits */}
+                                    <div className="mt-8 space-y-3">
+
+                                        {[
+                                            "₹2.50 per completed patient",
+                                            "Monthly billing capped at ₹5,000",
+                                            "No complicated subscription plans",
+                                        ].map((item) => (
+
+                                            <div
+                                                key={item}
+                                                className="flex items-center gap-3 text-sm font-semibold text-slate-700"
+                                            >
+
+                                                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+
+                                                    <Check
+                                                        size={14}
+                                                        strokeWidth={2.5}
+                                                    />
+
+                                                </span>
+
+                                                {item}
+
+                                            </div>
+
+                                        ))}
+
+                                    </div>
+
+                                </div>
+
+
+                                {/* RIGHT SIDE */}
+                                <div className="border-t border-slate-100 bg-slate-50/80 p-8 sm:p-12 lg:border-l lg:border-t-0">
+
+                                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
+                                        Example monthly usage
+                                    </p>
+
+
+                                    <div className="mt-6 space-y-3">
+
+                                        {[
+                                            ["100 patients", "₹250"],
+                                            ["500 patients", "₹1,250"],
+                                            ["1,000 patients", "₹2,500"],
+                                        ].map(([patients, price]) => (
+
+                                            <div
+                                                key={patients}
+                                                className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm"
+                                            >
+
+                                                <span className="text-sm font-semibold text-slate-600">
+                                                    {patients}
+                                                </span>
+
+                                                <span className="text-sm font-bold text-slate-900">
+                                                    {price}
+                                                </span>
+
+                                            </div>
+
+                                        ))}
+
+                                    </div>
+
+
+                                    <a
+                                        href="/login"
+                                        className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-xl"
+                                    >
+
+                                        Let's onboard
+
+                                        <ArrowRight
+                                            size={17}
+                                            className="transition-transform group-hover:translate-x-1"
+                                        />
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            {/* ============================================================
           HOW IT WORKS
       ============================================================ */}
 
-    <section
-        id="how-it-works"
-        className="relative z-10 overflow-hidden bg-white py-28"
-    >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
-                <div className="cf-reveal reveal-left">
-                    <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
-                        How it works
-                    </p>
+            <section
+                id="how-it-works"
+                className="relative z-10 overflow-hidden bg-white py-28"
+            >
+                <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
+                        <div className="cf-reveal reveal-left">
+                            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+                                How it works
+                            </p>
 
-                    <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
-                        Simple for your team.
-                        <span className="block text-blue-600">
-                            Powerful for your clinic.
-                        </span>
-                    </h2>
+                            <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
+                                Simple for your team.
+                                <span className="block text-blue-600">
+                                    Powerful for your clinic.
+                                </span>
+                            </h2>
 
-                    <p className="mt-6 max-w-xl leading-7 text-slate-600">
-                        CarePair keeps the complicated parts behind the scenes,
-                        so your team can focus on keeping the clinic moving.
-                    </p>
+                            <p className="mt-6 max-w-xl leading-7 text-slate-600">
+                                CarePair keeps the complicated parts behind the scenes,
+                                so your team can focus on keeping the clinic moving.
+                            </p>
 
-                    <a
-                        href="/login"
-                        className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/15 transition duration-300 hover:-translate-y-1 hover:bg-blue-700"
-                    >
-                        Let's onboard
-                        <ArrowRight
-                            size={17}
-                            className="transition-transform group-hover:translate-x-1"
-                        />
-                    </a>
+                            <a
+                                href="/login"
+                                className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/15 transition duration-300 hover:-translate-y-1 hover:bg-blue-700"
+                            >
+                                Let's onboard
+                                <ArrowRight
+                                    size={17}
+                                    className="transition-transform group-hover:translate-x-1"
+                                />
+                            </a>
+                        </div>
+
+                        <div className="space-y-4">
+                            <Step
+                                number="01"
+                                title="Create your clinic"
+                                description="Set up your clinic workspace and configure the essentials."
+                                delay="0ms"
+                            />
+
+                            <Step
+                                number="02"
+                                title="Bring your team"
+                                description="Invite doctors, receptionists and staff with the right access."
+                                delay="120ms"
+                            />
+
+                            <Step
+                                number="03"
+                                title="Start running"
+                                description="Manage patients, appointments, queues and everyday operations."
+                                delay="240ms"
+                            />
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-                <div className="space-y-4">
-                    <Step
-                        number="01"
-                        title="Create your clinic"
-                        description="Set up your clinic workspace and configure the essentials."
-                        delay="0ms"
-                    />
-
-                    <Step
-                        number="02"
-                        title="Bring your team"
-                        description="Invite doctors, receptionists and staff with the right access."
-                        delay="120ms"
-                    />
-
-                    <Step
-                        number="03"
-                        title="Start running"
-                        description="Manage patients, appointments, queues and everyday operations."
-                        delay="240ms"
-                    />
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {/* ============================================================
+            {/* ============================================================
           FINAL CTA
       ============================================================ */}
 
-    <section className="clinic-final-cta relative z-10 px-6 pb-10 lg:px-8">
-        <div className="cta-section relative mx-auto max-w-7xl overflow-hidden rounded-[34px] bg-blue-600 px-8 py-20 text-center text-white shadow-2xl shadow-blue-600/20 sm:px-12 lg:py-24">
-            <div className="cta-orb absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+            <section className="clinic-final-cta relative z-10 px-6 pb-10 lg:px-8">
+                <div className="cta-section relative mx-auto max-w-7xl overflow-hidden rounded-[34px] bg-blue-600 px-8 py-20 text-center text-white shadow-2xl shadow-blue-600/20 sm:px-12 lg:py-24">
+                    <div className="cta-orb absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
 
-            <div className="cta-orb-delay absolute -bottom-28 -right-20 h-80 w-80 rounded-full bg-cyan-300/20 blur-3xl" />
+                    <div className="cta-orb-delay absolute -bottom-28 -right-20 h-80 w-80 rounded-full bg-cyan-300/20 blur-3xl" />
 
-            <div className="relative mx-auto max-w-3xl">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur">
-                    <Activity size={27} />
+                    <div className="relative mx-auto max-w-3xl">
+                        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur">
+                            <Activity size={27} />
+                        </div>
+
+                        <h2 className="mt-7 text-4xl font-bold tracking-tight sm:text-5xl">
+                            Ready to bring order to your clinic?
+                        </h2>
+
+                        <p className="mx-auto mt-5 max-w-2xl leading-7 text-blue-100 sm:text-lg">
+                            Start your CarePair journey and give your team a simpler way
+                            to manage the day.
+                        </p>
+
+                        <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+                            <a
+                                href="/login"
+                                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-blue-600 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                            >
+                                Let's onboard
+                                <ArrowRight
+                                    size={17}
+                                    className="transition-transform group-hover:translate-x-1"
+                                />
+                            </a>
+
+                            <a
+                                href="/"
+                                className="inline-flex items-center justify-center rounded-xl border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
+                            >
+                                Sign in
+                            </a>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-                <h2 className="mt-7 text-4xl font-bold tracking-tight sm:text-5xl">
-                    Ready to bring order to your clinic?
-                </h2>
-
-                <p className="mx-auto mt-5 max-w-2xl leading-7 text-blue-100 sm:text-lg">
-                    Start your CarePair journey and give your team a simpler way
-                    to manage the day.
-                </p>
-
-                <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                    <a
-                        href="/login"
-                        className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-blue-600 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
-                    >
-                        Let's onboard
-                        <ArrowRight
-                            size={17}
-                            className="transition-transform group-hover:translate-x-1"
-                        />
-                    </a>
-
-                    <a
-                        href="/"
-                        className="inline-flex items-center justify-center rounded-xl border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
-                    >
-                        Sign in
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {/* ============================================================
+            {/* ============================================================
           FOOTER
       ============================================================ */}
 
-    <footer className="relative z-10 border-t border-slate-800 bg-slate-950 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between lg:px-8">
-            <a
-                href="/landing"
-                className="flex items-center gap-3"
-            >
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white">
-                    <Activity size={18} />
+            <footer className="relative z-10 border-t border-slate-800 bg-slate-950 text-white">
+                <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+                    <a
+                        href="/landing"
+                        className="flex items-center gap-3"
+                    >
+                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white">
+                            <Activity size={18} />
+                        </div>
+
+                        <span className="font-bold tracking-tight">
+                            <span className="text-blue-600">Care</span>Pair
+                        </span>
+                    </a>
+
+                    <p className="text-sm text-slate-400">
+                        © {new Date().getFullYear()} CarePair.
+                    </p>
+
+                    <div className="flex items-center gap-5 text-sm text-slate-200">
+                        <a
+                            href="#features"
+                            className="transition hover:text-blue-300"
+                        >
+                            Features
+                        </a>
+
+                        <a
+                            href="#about"
+                            className="transition hover:text-blue-300"
+                        >
+                            About
+                        </a>
+
+                        <a
+                            href="#pricing"
+                            className="transition hover:text-blue-300"
+                        >
+                            Pricing
+                        </a>
+
+                        <a
+                            href="/"
+                            className="transition hover:text-blue-300"
+                        >
+                            Sign in
+                        </a>
+                    </div>
                 </div>
+            </footer>
 
-                <span className="font-bold tracking-tight">
-                    <span className="text-blue-600">Care</span>Pair
-                </span>
-            </a>
-
-            <p className="text-sm text-slate-400">
-                © {new Date().getFullYear()} CarePair.
-            </p>
-
-            <div className="flex items-center gap-5 text-sm text-slate-200">
-                <a
-                    href="#features"
-                    className="transition hover:text-blue-300"
-                >
-                    Features
-                </a>
-
-                <a
-                    href="#about"
-                    className="transition hover:text-blue-300"
-                >
-                    About
-                </a>
-
-                <a
-                    href="/"
-                    className="transition hover:text-blue-300"
-                >
-                    Sign in
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    {/* ============================================================
+            {/* ============================================================
           PAGE STYLES
       ============================================================ */}
 
-    <style jsx global>{`
+            <style jsx global>{`
         html {
           scroll-behavior: smooth;
         }
